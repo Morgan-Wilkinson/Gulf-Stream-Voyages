@@ -21,17 +21,14 @@ const AboutIntro = () => {
         <div className="row">
           <div className="offset-xl-6 col-xl-5 col-lg-6">
             <h2 className="text-30 fw-600">
-              GoTrip is a World Leading Cruise Booking Platform
+              Gulf Stream Voyages is a World Class Cruise Booking Platform
             </h2>
             <p className="text-dark-1 mt-40 lg:mt-20 sm:mt-15">
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+              We specialize in providing exquisite and personalized voyages around South Florida.
             </p>
             <div className="d-inline-block mt-40 lg:mt-30 sm:mt-20">
               <a
-                href="#"
+                href="/about"
                 className="button -md -blue-1 bg-yellow-1 text-dark-1"
               >
                 Learn More <div className="icon-arrow-top-right ml-15" />
