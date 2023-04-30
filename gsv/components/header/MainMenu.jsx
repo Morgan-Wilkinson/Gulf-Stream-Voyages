@@ -25,45 +25,18 @@ const MainMenu = ({ style = "" }) => {
         </li>
         {/* End home page menu */}
 
-        <li className="menu-item-has-children -has-mega-menu">
-          <a href="#">
-            <span className="mr-10">Categories</span>
-            <i className="icon icon-chevron-sm-down" />
-          </a>
-          <div className="mega">
-            <CategoriesMegaMenu />
-          </div>
+        <li className={router.pathname === "/cruise/cruise-list-v1" ? "current" : ""}>
+          <Link href="/cruise/cruise-list-v1">Cruises</Link>
         </li>
-        {/* End categories menu items */}
+        {/* End Cruises single menu */}
 
-        <li className={router.pathname === "/destinations" ? "current" : ""}>
-          <Link href="/destinations">Destinations</Link>
+        <li className={router.pathname === "/contact" ? "current" : ""}>
+          <Link href="/contact">Contact</Link>
         </li>
-        {/* End Destinations single menu */}
 
-        <li
-          className={`${
-            isActiveParentChaild(blogItems, router.asPath) ? "current" : ""
-          } menu-item-has-children`}
-        >
-          <a href="#">
-            <span className="mr-10">Blog</span>
-            <i className="icon icon-chevron-sm-down" />
-          </a>
-          <ul className="subnav">
-            {blogItems.map((menu, i) => (
-              <li
-                key={i}
-                className={
-                  isActiveLink(menu.routePath, router.asPath) ? "current" : ""
-                }
-              >
-                <Link href={menu.routePath}>{menu.name}</Link>
-              </li>
-            ))}
-          </ul>
+        <li className={router.pathname === "/testimonies" ? "current" : ""}>
+          <Link href="/testimonies">Testimonies</Link>
         </li>
-        {/* End blogIems */}
 
         <li
           className={`${
@@ -110,10 +83,6 @@ const MainMenu = ({ style = "" }) => {
               </li>
             ))}
           </ul>
-        </li>
-
-        <li className={router.pathname === "/contact" ? "current" : ""}>
-          <Link href="/contact">Contact</Link>
         </li>
       </ul>
     </nav>

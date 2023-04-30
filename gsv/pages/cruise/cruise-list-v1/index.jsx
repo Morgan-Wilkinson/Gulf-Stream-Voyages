@@ -1,7 +1,7 @@
 import CallToActions from "../../../components/common/CallToActions";
 import Seo from "../../../components/common/Seo";
-import Header11 from "../../../components/header/header-11";
-import DefaultFooter from "../../../components/footer/default";
+import Header from "../../../components/header/header";
+import Footer from "../../../components/footer/footer";
 import MainFilterSearchBox from "../../../components/cruise-list/cruise-list-v1/MainFilterSearchBox";
 import TopHeaderFilter from "../../../components/cruise-list/cruise-list-v1/TopHeaderFilter";
 import CruiseProperties from "../../../components/cruise-list/cruise-list-v1/CruiseProperties";
@@ -15,9 +15,9 @@ const index = () => {
       {/* End Page Title */}
 
       <div className="header-margin"></div>
-      {/* header top margin */}
+      header top margin
 
-      <Header11 />
+      <Header />
       {/* End Header 1 */}
 
       <section className="pt-40 pb-40 bg-light-2">
@@ -92,10 +92,7 @@ const index = () => {
       </section>
       {/* End layout for listing sidebar and content */}
 
-      <CallToActions />
-      {/* End Call To Actions Section */}
-
-      <DefaultFooter />
+      <Footer />
     </>
   );
 };
