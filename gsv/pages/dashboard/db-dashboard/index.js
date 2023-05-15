@@ -1,3 +1,7 @@
+"use client";
+import React from "react";
+import { useAuthContext } from "/context/AuthContext";
+import { useRouter } from "next/navigation";
 import Seo from "../../../components/common/Seo";
 import DashboardCard from "./components/DashboardCard";
 import Sidebar from "../common/Sidebar";
@@ -8,7 +12,14 @@ import Link from "next/link";
 import RercentBooking from "./components/RercentBooking";
 import Footer from "../common/Footer";
 
-const index = () => {
+function Index() {
+  const { user } = useAuthContext();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (user == null) router.push("/");
+  }, [user]);
+
   return (
     <>
       <Seo pageTitle="Dashboard" />
@@ -89,6 +100,6 @@ const index = () => {
       {/* End dashbaord content */}
     </>
   );
-};
+}
 
-export default index;
+export default Index;

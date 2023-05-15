@@ -1,8 +1,31 @@
+"use client";
+import React from "react";
+import signUp from "/firebase/auth/signup";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const SignUpForm = () => {
+function SignUpForm() {
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const router = useRouter();
+
+  const handleForm = async (event) => {
+    event.preventDefault();
+
+    const { result, error } = await signUp(email, password);
+
+    if (error) {
+      return console.log(error);
+    }
+
+    // else successful
+    console.log(result);
+    return router.push("/");
+  };
   return (
-    <form className="row y-gap-20">
+    <form onSubmit={handleForm} className="form row y-gap-20">
       <div className="col-12">
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
@@ -16,7 +39,13 @@ const SignUpForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <input type="text" required />
+          <input
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            type="text"
+            name="firstName"
+            id="firstName"
+          />
           <label className="lh-1 text-14 text-light-1">First Name</label>
         </div>
       </div>
@@ -24,7 +53,13 @@ const SignUpForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <input type="text" required />
+          <input
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            type="text"
+            name="lastName"
+            id="lastName"
+          />
           <label className="lh-1 text-14 text-light-1">Last Name</label>
         </div>
       </div>
@@ -32,7 +67,13 @@ const SignUpForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <input type="text" required />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            type="email"
+            name="email"
+            id="email"
+          />
           <label className="lh-1 text-14 text-light-1">Email</label>
         </div>
       </div>
@@ -40,7 +81,13 @@ const SignUpForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <input type="password" required />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            type="password"
+            name="password"
+            id="password"
+          />
           <label className="lh-1 text-14 text-light-1">Password</label>
         </div>
       </div>
@@ -55,25 +102,8 @@ const SignUpForm = () => {
       {/* End .col */}
 
       <div className="col-12">
-        <div className="d-flex ">
-          <div className="form-checkbox mt-5">
-            <input type="checkbox" name="name" />
-            <div className="form-checkbox__mark">
-              <div className="form-checkbox__icon icon-check" />
-            </div>
-          </div>
-          <div className="text-15 lh-15 text-light-1 ml-10">
-            Email me exclusive Agoda promotions. I can opt out later as stated
-            in the Privacy Policy.
-          </div>
-        </div>
-      </div>
-      {/* End .col */}
-
-      <div className="col-12">
         <button
           type="submit"
-          href="#"
           className="button py-20 -dark-1 bg-blue-1 text-white w-100"
         >
           Sign Up <div className="icon-arrow-top-right ml-15" />
@@ -82,6 +112,6 @@ const SignUpForm = () => {
       {/* End .col */}
     </form>
   );
-};
+}
 
 export default SignUpForm;

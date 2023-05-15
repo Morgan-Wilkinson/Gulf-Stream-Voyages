@@ -4,7 +4,7 @@ import Header from "../../../components/header/dashboard-header";
 import Footer from "../common/Footer";
 import BookingTable from "./components/BookingTable";
 
-const index = () => {
+const Index = () => {
   return (
     <>
       <Seo pageTitle="Booking History" />
@@ -51,4 +51,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
