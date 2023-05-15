@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import signUp from "/firebase/auth/signup";
+import addData from "/firebase/firestore/addData";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -14,14 +15,31 @@ function SignUpForm() {
   const handleForm = async (event) => {
     event.preventDefault();
 
-    const { result, error } = await signUp(email, password);
+    const { newUser, newUserError } = await signUp(email, password);
 
-    if (error) {
-      return console.log(error);
+    if (newUserError) {
+      return console.log(newUserError);
+    } else if (newUser) {
+      console.log(newUser);
+      const newUserData = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        role: "customer",
+      };
+      const { dataResult, dataError } = await addData(
+        "users",
+        newUser,
+        newUserData
+      );
+      if (dataError) {
+        return console.log(dataError);
+      } else {
+        console.log(dataResult);
+      }
     }
 
     // else successful
-    console.log(result);
     return router.push("/");
   };
   return (

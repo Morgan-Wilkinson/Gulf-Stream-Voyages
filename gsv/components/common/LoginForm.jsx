@@ -12,14 +12,14 @@ function LoginForm() {
   const handleForm = async (event) => {
     event.preventDefault();
 
-    const { result, error } = await signIn(email, password);
+    const { signedInUser, signedInUserError } = await signIn(email, password);
 
-    if (error) {
-      return console.log(error);
+    if (signedInUserError) {
+      return console.log(signedInUserError);
     }
 
     // else successful
-    console.log(result);
+    console.log(signedInUser);
     return router.push("/");
   };
   return (
