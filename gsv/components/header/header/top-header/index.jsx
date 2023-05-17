@@ -21,7 +21,10 @@ const HeaderBanner = () => {
               </div>
               <div className="col-auto">
                 <Link href="/login" className="text-12 text-white">
-                  Sign In / Register
+                  Sign In
+                </Link>
+                <Link href="/signup" className="text-12 text-white">
+                  Sign In
                 </Link>
               </div>
               {/* End .col-auto */}

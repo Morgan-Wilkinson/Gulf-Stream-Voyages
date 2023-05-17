@@ -1,9 +1,5 @@
-"use client";
-//import "./globals.css";
-import { AuthContextProvider } from "../../context/AuthContext";
-
 const Wrapper = ({ children }) => {
-  return <AuthContextProvider>{children}</AuthContextProvider>;
+  return { children };
 };
 
 export default Wrapper;

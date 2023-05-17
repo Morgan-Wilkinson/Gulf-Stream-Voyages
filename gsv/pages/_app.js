@@ -10,6 +10,7 @@ import "aos/dist/aos.css";
 import "../styles/index.scss";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
+import { AuthContextProvider } from "../firebase/AuthContext";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
@@ -25,10 +26,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <main>
-      <Provider store={store}>
+      <AuthContextProvider>
         <Component {...pageProps} />
         <ScrollTop />
-      </Provider>
+      </AuthContextProvider>
     </main>
   );
 }

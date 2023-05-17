@@ -4,10 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta
-          name="description"
-          content="GoTrip - Tour & Travel React NextJS Template"
-        />
+        <meta name="description" content="Gulf Stream Voyages" />
         {/* <!-- Google fonts --> */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -22,7 +19,7 @@ export default function Document() {
 
         <meta
           name="keywords"
-          content="	booking, car rental, cruise, destination, experiences, flight, holiday, hotel, real estate, resort, tour, travel, travel agency, trip, vacation"
+          content="	booking, cruise, destination, experiences, holiday, tour, travel, travel agency, trip, vacation, voyage, boat"
         />
 
         <link rel="icon" href="/favicon.ico" />
