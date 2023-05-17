@@ -1,6 +1,6 @@
 import Aos from "aos";
 import { useEffect } from "react";
-import SrollTop from "../components/common/ScrollTop";
+import ScrollTop from "../components/common/ScrollTop";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }) {
     <main>
       <Provider store={store}>
         <Component {...pageProps} />
-        <SrollTop />
+        <ScrollTop />
       </Provider>
     </main>
   );

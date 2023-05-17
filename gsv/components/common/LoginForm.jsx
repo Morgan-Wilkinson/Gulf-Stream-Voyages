@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 function LoginForm() {
+  const [error, setError] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
@@ -12,15 +13,23 @@ function LoginForm() {
   const handleForm = async (event) => {
     event.preventDefault();
 
+    // Reset the error before trying to submit the form
+    if (error) setError("");
+
     const { signedInUser, signedInUserError } = await signIn(email, password);
 
     if (signedInUserError) {
-      return console.log(signedInUserError);
+      console.log(signedInUserError);
+      setError(signedInUserError);
+      return;
+    } else if (signedInUser) {
+      console.log(signedInUser);
+      return router.push("/");
+    } else {
+      setError(
+        "Sorry we are experiencing technical difficulties right now. Please try again later."
+      );
     }
-
-    // else successful
-    console.log(signedInUser);
-    return router.push("/");
   };
   return (
     <form onSubmit={handleForm} className="form row y-gap-20">
@@ -28,7 +37,7 @@ function LoginForm() {
         <h1 className="text-22 fw-500">Welcome back</h1>
         <p className="mt-10">
           Don&apos;t have an account yet?{" "}
-          <Link href="/others-pages/signup" className="text-blue-1">
+          <Link href="/signup" className="text-blue-1">
             Sign up for free
           </Link>
         </p>
@@ -69,6 +78,10 @@ function LoginForm() {
         </a>
       </div>
       {/* End .col */}
+
+      <div>
+        <p style={{ color: "red" }}>{error}</p>
+      </div>
 
       <div className="col-12">
         <button

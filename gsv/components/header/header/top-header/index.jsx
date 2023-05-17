@@ -17,10 +17,10 @@ const HeaderBanner = () => {
           <div className="col-auto">
             <div className="row x-gap-15 items-center jusify-between">
               <div className="col-auto">
-                    <div className="w-1 h-20 bg-white-20" />
-                  </div>
+                <div className="w-1 h-20 bg-white-20" />
+              </div>
               <div className="col-auto">
-                <Link href="/others-pages/login" className="text-12 text-white">
+                <Link href="/login" className="text-12 text-white">
                   Sign In / Register
                 </Link>
               </div>

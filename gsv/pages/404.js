@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import CallToActions from "../components/common/CallToActions";
 import Seo from "../components/common/Seo";
 import DefaultHeader from "../components/header/default-header";
-import DefaultFooter from "../components/footer/default";
+import DefaultFooter from "../components/footer";
 import NotFound from "../components/common/NotFound";
 
 const index = () => {

@@ -5,7 +5,7 @@ import Header from "../../../components/header/dashboard-header";
 import ChartSelect from "./components/ChartSelect";
 import ChartMain from "./components/ChartMain";
 import Link from "next/link";
-import RercentBooking from "./components/RercentBooking";
+import RecentBooking from "./components/RecentBooking";
 import Footer from "../common/Footer";
 
 const index = () => {
@@ -72,7 +72,7 @@ const index = () => {
                   </div>
                   {/* End d-flex */}
 
-                  <RercentBooking />
+                  <RecentBooking />
                 </div>
                 {/* End py-30 */}
               </div>

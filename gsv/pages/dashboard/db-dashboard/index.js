@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { useAuthContext } from "/context/AuthContext";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import Seo from "../../../components/common/Seo";
 import DashboardCard from "./components/DashboardCard";
@@ -9,13 +10,16 @@ import Header from "../../../components/header/dashboard-header";
 import ChartSelect from "./components/ChartSelect";
 import ChartMain from "./components/ChartMain";
 import Link from "next/link";
-import RercentBooking from "./components/RercentBooking";
+import RecentBooking from "./components/RecentBooking";
 import Footer from "../common/Footer";
 
+const auth = getAuth();
 function Index() {
-  const { user } = useAuthContext();
+  console.log(auth.currentUser);
+  const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
 
+  console.log(user);
   React.useEffect(() => {
     if (user == null) router.push("/");
   }, [user]);
@@ -83,7 +87,7 @@ function Index() {
                   </div>
                   {/* End d-flex */}
 
-                  <RercentBooking />
+                  <RecentBooking />
                 </div>
                 {/* End py-30 */}
               </div>
