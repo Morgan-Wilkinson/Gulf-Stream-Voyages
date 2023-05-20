@@ -1,14 +1,7 @@
 import Link from "next/link";
 
+import { pageItems, dashboardItems } from "../../data/mainMenuData";
 import {
-  homeItems,
-  blogItems,
-  pageItems,
-  dashboardItems,
-} from "../../data/mainMenuData";
-import CategoriesMegaMenu from "./CategoriesMegaMenu";
-import {
-  isActiveParent,
   isActiveLink,
   isActiveParentChaild,
 } from "../../utils/linkActiveChecker";
@@ -25,7 +18,11 @@ const MainMenu = ({ style = "" }) => {
         </li>
         {/* End home page menu */}
 
-        <li className={router.pathname === "/cruise/cruise-list-v1" ? "current" : ""}>
+        <li
+          className={
+            router.pathname === "/cruise/cruise-list-v1" ? "current" : ""
+          }
+        >
           <Link href="/cruise/cruise-list-v1">Cruises</Link>
         </li>
         {/* End Cruises single menu */}

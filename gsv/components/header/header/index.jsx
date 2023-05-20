@@ -26,8 +26,7 @@ const Header = () => {
             <div className="col-auto">
               <div className="d-flex items-center">
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
+                  <img src="/img/general/logo-light.svg" alt="logo icon" />
                 </Link>
                 {/* End logo */}
 

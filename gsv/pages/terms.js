@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import CallToActions from "../components/common/CallToActions";
 import Seo from "../components/common/Seo";
-import Header from "../components/header/default-header";
+import Header from "../components/header/header";
 import Footer from "../components/footer";
 import TermsContent from "../components/common/TermsContent";
 

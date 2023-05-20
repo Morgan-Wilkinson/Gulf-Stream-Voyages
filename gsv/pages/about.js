@@ -1,12 +1,13 @@
 import dynamic from "next/dynamic";
 import CallToActions from "../components/common/CallToActions";
 import Seo from "../components/common/Seo";
-import Header from "../components/header/default-header";
+import Header from "../components/header/header";
 import Footer from "../components/footer";
 import WhyChoose from "../components/block/BlockGuide";
 import Block1 from "../components/about/Block1";
 import Image from "next/image";
 import Team1 from "../components/team/Team1";
+import Faq from "../components/faq/Faq";
 import Testimonial from "../components/testimonial/Testimonial";
 
 const About = () => {
@@ -114,6 +115,38 @@ const About = () => {
         {/* End container */}
       </section>
       {/* End team section */}
+
+      <section className="layout-pt-lg layout-pb-lg">
+        <div className="container">
+          <div className="row justify-center text-center">
+            <div className="col-auto">
+              <div className="sectionTitle -md">
+                <h2 className="sectionTitle__title">
+                  Frequently Asked Questions
+                </h2>
+                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                  Interdum et malesuada fames
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* End .row */}
+
+          <div className="row y-gap-30 justify-center pt-40 sm:pt-20">
+            <div className="col-xl-8 col-lg-10">
+              <div
+                className="accordion -simple row y-gap-20 js-accordion"
+                id="Faq1"
+              >
+                <Faq />
+              </div>
+            </div>
+          </div>
+          {/* End .row */}
+        </div>
+        {/* End .container */}
+      </section>
+      {/* End faq section block */}
 
       <section className="section-bg layout-pt-lg layout-pb-lg">
         <div className="section-bg__item -mx-20 bg-light-2" />

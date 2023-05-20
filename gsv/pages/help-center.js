@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import CallToActions from "../components/common/CallToActions";
 import Seo from "../components/common/Seo";
 import Faq from "../components/faq/Faq";
-import Header from "../components/header/default-header";
+import Header from "../components/header/header";
 import Footer from "../components/footer";
 import HelpSearchBlock from "../components/block/HelpSearchBlock";
 import HelpBlock from "../components/block/HelpBlock";

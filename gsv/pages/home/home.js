@@ -3,12 +3,11 @@ import Seo from "../../components/common/Seo";
 import Footer from "../../components/footer";
 import Header from "../../components/header/header";
 import Hero from "../../components/hero/hero";
-import TopHeader from "../../components/header/header/top-header";
 import Testimonial from "../../components/home/home/Testimonial";
 import Link from "next/link";
 import AboutIntro from "../../components/home/home/AboutIntro";
 import WhyChoose from "../../components/home/home/WhyChoose";
-import Cruise3 from "../../components/cruise/Cruise3";
+import Cruise from "../../components/cruise/Cruise1";
 import SearchBoxContent from "../../components/hero/hero/SearchBoxContent";
 
 const home = () => {
@@ -17,7 +16,7 @@ const home = () => {
       <Seo pageTitle="Home" />
       {/* End Page Title */}
 
-      <TopHeader />
+      <Header />
       {/* End Header top Banner */}
 
       <div
@@ -73,7 +72,7 @@ const home = () => {
           {/* End .row */}
 
           <div className="row y-gap-30 pt-40 sm:pt-20">
-            <Cruise3 />
+            <Cruise />
           </div>
           {/* End .row */}
         </div>
