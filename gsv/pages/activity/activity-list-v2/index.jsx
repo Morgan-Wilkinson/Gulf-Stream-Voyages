@@ -1,7 +1,7 @@
 import CallToActions from "../../../components/common/CallToActions";
 import Seo from "../../../components/common/Seo";
 import Header11 from "../../../components/header/header-11";
-import DefaultFooter from "../../../components/footer/default";
+import Footer from "../../../components/footer/default";
 import MainFilterSearchBox from "../../../components/activity-list/activity-list-v2/MainFilterSearchBox";
 import TopHeaderFilter from "../../../components/activity-list/activity-list-v2/TopHeaderFilter";
 import ActivityProperties from "../../../components/activity-list/activity-list-v2/ActivityProperties";
@@ -79,7 +79,7 @@ const index = () => {
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
     </>
   );
 };

@@ -1,7 +1,6 @@
 import ContactInfo from "./ContactInfo";
 import Copyright from "./Copyright";
 import FooterContent from "./FooterContent";
-import AppButton from "./AppButton";
 import Subscribe from "./Subscribe";
 
 const index = () => {

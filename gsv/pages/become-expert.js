@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import CallToActions from "../components/common/CallToActions";
 import Seo from "../components/common/Seo";
-import DefaultHeader from "../components/header/default-header";
-import DefaultFooter from "../components/footer";
+import Header from "../components/header/default-header";
+import Footer from "../components/footer";
 import Image from "next/image";
 // import HowWorks from "../components/block/HowWorks";
 import Block2 from "../components/about/Block2";
@@ -114,13 +114,13 @@ const BecomeExpert = () => {
       </section>
       {/* End faq section block */}
 
-      <DefaultHeader />
+      <Header />
       {/* End Header 1 */}
 
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
       {/* End Call To Actions Section */}
     </>
   );

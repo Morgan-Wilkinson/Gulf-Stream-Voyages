@@ -1,16 +1,13 @@
 import dynamic from "next/dynamic";
 import CallToActions from "../components/common/CallToActions";
 import Seo from "../components/common/Seo";
-import DefaultHeader from "../components/header/default-header";
-import DefaultFooter from "../components/footer";
+import Header from "../components/header/default-header";
+import Footer from "../components/footer";
 import WhyChoose from "../components/block/BlockGuide";
 import Block1 from "../components/about/Block1";
 import Image from "next/image";
-import Counter from "../components/counter/Counter";
 import Team1 from "../components/team/Team1";
 import Testimonial from "../components/testimonial/Testimonial";
-import Counter2 from "../components/counter/Counter2";
-import Brand from "../components/brand/Brand";
 
 const About = () => {
   return (
@@ -21,7 +18,7 @@ const About = () => {
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <DefaultHeader />
+      <Header />
       {/* End Header 1 */}
 
       <section className="section-bg layout-pt-lg layout-pb-lg">
@@ -87,9 +84,7 @@ const About = () => {
       <section className="pt-60">
         <div className="container">
           <div className="border-bottom-light pb-40">
-            <div className="row y-gap-30 justify-center text-center">
-              <Counter />
-            </div>
+            <div className="row y-gap-30 justify-center text-center"></div>
           </div>
         </div>
       </section>
@@ -145,15 +140,11 @@ const About = () => {
           {/* End .overflow-hidden */}
 
           <div className="row y-gap-30 items-center pt-40 sm:pt-20">
-            <div className="col-xl-4">
-              <Counter2 />
-            </div>
+            <div className="col-xl-4"></div>
             {/* End .col */}
 
             <div className="col-xl-8">
-              <div className="row y-gap-30 justify-between items-center">
-                <Brand />
-              </div>
+              <div className="row y-gap-30 justify-between items-center"></div>
             </div>
             {/* End .col */}
           </div>
@@ -166,7 +157,7 @@ const About = () => {
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
       {/* End Call To Actions Section */}
     </>
   );

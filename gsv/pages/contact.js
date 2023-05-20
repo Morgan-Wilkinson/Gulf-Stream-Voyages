@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import CallToActions from "../components/common/CallToActions";
 import Seo from "../components/common/Seo";
-import DefaultHeader from "../components/header/default-header";
-import DefaultFooter from "../components/footer";
+import Header from "../components/header/default-header";
+import Footer from "../components/footer";
 import WhyChoose from "../components/block/BlockGuide";
 import Address from "../components/block/Address";
 import Social from "../components/common/social/Social";
@@ -18,7 +18,7 @@ const Contact = () => {
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <DefaultHeader />
+      <Header />
       {/* End Header 1 */}
 
       <LocationTopBar />
@@ -98,7 +98,7 @@ const Contact = () => {
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
       {/* End Call To Actions Section */}
     </>
   );

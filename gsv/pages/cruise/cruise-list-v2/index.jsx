@@ -1,7 +1,7 @@
 import CallToActions from "../../../components/common/CallToActions";
 import Seo from "../../../components/common/Seo";
 import Header from "../../../components/header/header";
-import DefaultFooter from "../../../components/footer";
+import Footer from "../../../components/footer";
 import TopHeaderFilter from "../../../components/cruise-list/cruise-list-v2/TopHeaderFilter";
 import CruiseProperties from "../../../components/cruise-list/cruise-list-v2/CruiseProperties";
 import Pagination from "../../../components/cruise-list/common/Pagination";
@@ -78,7 +78,7 @@ const index = () => {
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
     </>
   );
 };

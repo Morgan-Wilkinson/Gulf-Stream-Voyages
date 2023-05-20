@@ -1,8 +1,8 @@
 import React from "react";
 import CallToActions from "../../components/common/CallToActions";
 import Seo from "../../components/common/Seo";
-import DefaultHeader from "../../components/header/default-header";
-import DefaultFooter from "../../components/footer/default";
+import Header from "../../components/header/default-header";
+import Footer from "../../components/footer/default";
 import LocationTopBar from "../../components/common/LocationTopBar";
 import Blog2 from "../../components/blog/Blog2";
 import BlogSidebar from "../../components/blog/blog-sidebar";
@@ -17,7 +17,7 @@ const BlogListV2 = () => {
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <DefaultHeader />
+      <Header />
       {/* End Header 1 */}
 
       <LocationTopBar />
@@ -64,7 +64,7 @@ const BlogListV2 = () => {
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
       {/* End Call To Actions Section */}
     </>
   );

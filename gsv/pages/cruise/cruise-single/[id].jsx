@@ -14,7 +14,7 @@ import ReplyForm from "../../../components/cruise-single/ReplyForm";
 import ReplyFormReview from "../../../components/cruise-single/ReplyFormReview";
 import Facilities from "../../../components/cruise-single/Facilities";
 import CallToActions from "../../../components/common/CallToActions";
-import DefaultFooter from "../../../components/footer/default";
+import Footer from "../../../components/footer/default";
 import MapPropertyFinder from "../../../components/cruise-single/MapPropertyFinder";
 import GalleryCruiseSlider from "../../../components/cruise-single/GalleryCruiseSlider";
 
@@ -202,7 +202,7 @@ const CruiseSingleV1Dynamic = () => {
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
     </>
   );
 };

@@ -15,7 +15,7 @@ import DetailsReview2 from "../../../components/activity-single/guest-reviews/De
 import ReplyForm from "../../../components/activity-single/ReplyForm";
 import ReplyFormReview2 from "../../../components/activity-single/ReplyFormReview2";
 import CallToActions from "../../../components/common/CallToActions";
-import DefaultFooter from "../../../components/footer/default";
+import Footer from "../../../components/footer/default";
 import Tours from "../../../components/tours/Tours";
 import Faq from "../../../components/faq/Faq";
 import Link from "next/link";
@@ -299,7 +299,7 @@ const TourSingleV1Dynamic = () => {
       <CallToActions />
       {/* End Call To Actions Section */}
 
-      <DefaultFooter />
+      <Footer />
     </>
   );
 };

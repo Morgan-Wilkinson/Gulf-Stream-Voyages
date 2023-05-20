@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
 
-const Header1 = () => {
+const Header = () => {
   const [navbar, setNavbar] = useState(false);
 
   const changeBackground = () => {
@@ -20,18 +20,23 @@ const Header1 = () => {
 
   return (
     <>
-      {" "}
-      <header
-        className={`header mt-40  ${navbar ? "is-sticky bg-dark-1" : ""}`}
-      >
-        <div className="header__container container">
+      <header className={`header bg-white ${navbar ? "is-sticky" : ""}`}>
+        <div className="header__container px-30 sm:px-20">
           <div className="row justify-between items-center">
             <div className="col-auto">
               <div className="d-flex items-center">
-                <Link href="/" className="header-logo mr-50">
-                  <img src="/img/general/logo-light.svg" alt="logo icon" />
+                <Link href="/" className="header-logo mr-20">
+                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
+                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
                 </Link>
                 {/* End logo */}
+
+                <div className="header-menu">
+                  <div className="header-menu__content">
+                    <MainMenu style="text-dark-1" />
+                  </div>
+                </div>
+                {/* End header-menu */}
               </div>
               {/* End d-flex */}
             </div>
@@ -39,25 +44,28 @@ const Header1 = () => {
 
             <div className="col-auto">
               <div className="d-flex items-center">
-                <div className="header-menu">
-                  <div className="header-menu__content">
-                    <MainMenu style="text-white" />
-                  </div>
+                {/* Start btn-group */}
+                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+                  <Link
+                    href="/login"
+                    className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
+                  >
+                    Sign In
+                  </Link>
                 </div>
-                {/* End header-menu */}
 
-                <div className="d-flex items-center ml-24 is-menu-opened-hide md:d-none">
-                  <button
-                    className="text-26 xl:text-20 text-white icon-search"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasTop2"
-                    aria-controls="offcanvasTop2"
-                  ></button>
+                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+                  <Link
+                    href="signup"
+                    className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
+                  >
+                    Register
+                  </Link>
                 </div>
-                {/* End Search Icon */}
+                {/* End btn-group */}
 
                 {/* Start mobile menu icon */}
-                <div className="d-none xl:d-flex x-gap-20 items-center pl-20 text-white">
+                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   <div>
                     <Link
                       href="/login"
@@ -93,9 +101,9 @@ const Header1 = () => {
         </div>
         {/* End header_container */}
       </header>
-      {/* End header */}
+      {/* End Header */}
     </>
   );
 };
 
-export default Header1;
+export default Header;
