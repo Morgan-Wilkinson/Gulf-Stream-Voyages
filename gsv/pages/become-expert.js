@@ -1,12 +1,12 @@
 import dynamic from "next/dynamic";
-import CallToActions from "../../components/common/CallToActions";
-import Seo from "../../components/common/Seo";
-import DefaultHeader from "../../components/header/default-header";
-import DefaultFooter from "../../components/footer/default";
+import CallToActions from "../components/common/CallToActions";
+import Seo from "../components/common/Seo";
+import DefaultHeader from "../components/header/default-header";
+import DefaultFooter from "../components/footer";
 import Image from "next/image";
-import HowWorks from "../../components/block/HowWorks";
-import Block2 from "../../components/about/Block2";
-import Faq from "../../components/faq/Faq";
+// import HowWorks from "../components/block/HowWorks";
+import Block2 from "../components/about/Block2";
+import Faq from "../components/faq/Faq";
 import Link from "next/link";
 
 const BecomeExpert = () => {
@@ -69,7 +69,7 @@ const BecomeExpert = () => {
           {/* End .row */}
 
           <div className="row y-gap-30 justify-between pt-40">
-            <HowWorks />
+            {/* <HowWorks /> */}
           </div>
           {/* End .row */}
         </div>

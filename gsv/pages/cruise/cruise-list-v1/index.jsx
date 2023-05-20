@@ -1,7 +1,7 @@
 import CallToActions from "../../../components/common/CallToActions";
 import Seo from "../../../components/common/Seo";
 import Header from "../../../components/header/header";
-import Footer from "../../../components/footer/footer";
+import Footer from "../../../components/footer";
 import MainFilterSearchBox from "../../../components/cruise-list/cruise-list-v1/MainFilterSearchBox";
 import TopHeaderFilter from "../../../components/cruise-list/cruise-list-v1/TopHeaderFilter";
 import CruiseProperties from "../../../components/cruise-list/cruise-list-v1/CruiseProperties";
@@ -13,13 +13,10 @@ const index = () => {
     <>
       <Seo pageTitle="Cruise List v1" />
       {/* End Page Title */}
-
       <div className="header-margin"></div>
       header top margin
-
       <Header />
       {/* End Header 1 */}
-
       <section className="pt-40 pb-40 bg-light-2">
         <div className="container">
           <div className="row">
@@ -35,7 +32,6 @@ const index = () => {
         </div>
       </section>
       {/* Top SearchBanner */}
-
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
           <div className="row y-gap-30">
@@ -91,7 +87,6 @@ const index = () => {
         {/* End .container */}
       </section>
       {/* End layout for listing sidebar and content */}
-
       <Footer />
     </>
   );
