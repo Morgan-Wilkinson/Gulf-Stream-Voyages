@@ -26,10 +26,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <main>
-      <AuthContextProvider>
-        <Component {...pageProps} />
-        <ScrollTop />
-      </AuthContextProvider>
+      {/* <AuthContextProvider> */}
+      <Component {...pageProps} />
+      <ScrollTop />
+      {/* </AuthContextProvider> */}
     </main>
   );
 }
