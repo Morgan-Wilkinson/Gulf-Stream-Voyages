@@ -1,24 +1,47 @@
 "use client";
 import React from "react";
-import signUp from "/firebase/auth/signup";
+import Link from "next/link";
 import addData from "/firebase/firestore/addData";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 function SignUpForm() {
-  const [error, setError] = React.useState("");
+  const router = useRouter();
+  const auth = getAuth();
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmationPassword, setConfirmationPassword] = React.useState("");
-  const router = useRouter();
+  const [shownError, setError] = React.useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const errorCodeMessage = new Map([
+    [
+      "auth/account-exists-with-different-credential",
+      "There is already an Account associated with this crendetial",
+    ],
+    ["auth/email-already-in-use", "Email already in use"],
+    ["auth/invalid-email", "Invalid email"],
+    ["auth/operation-not-allowed", "Sign up method currently not supported"],
+    ["auth/weak-password", "Weak password"],
+    [
+      "auth/user-disabled",
+      "User currently disabled please contact technical support at admin@gulfstreamvoyages.com",
+    ],
+    ["auth/user-not-found", "User not found"],
+    ["auth/wrong-password", "Incorrect password"],
+    ["auth/invalid-verification-code", "Invalid Verification Code"],
+    ["auth/invalid-verification-id", "Invalid Verification Id"],
+    ["auth/invalid-credential", "Expired credentials"],
+  ]);
 
   const handleForm = async (event) => {
     event.preventDefault();
 
     // Reset the error before trying to submit the form
     if (error) setError("");
+    if (shownError) setError("");
 
     // Check passwords match
     if (password !== confirmationPassword) {
@@ -36,37 +59,50 @@ function SignUpForm() {
       );
       return;
     }
-    const { newUser, newUserError } = await signUp(email, password);
 
-    if (newUserError) {
-      console.log(newUserError);
-      setError(newUserError);
+    try {
+      const signUpResult = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(signUpResult);
+      console.log(signUpResult.user.uid);
+    } catch (err) {
+      if (errorCodeMessage.get(err.code) != null) {
+        setError(errorCodeMessage.get(err.code));
+      } else {
+        setError(
+          "Sorry we are experiencing technical difficulties right now. Please try again later."
+        );
+      }
       return;
-    } else if (newUser) {
-      console.log(newUser);
+    }
+
+    if (user) {
+      console.log(user);
       const newUserData = {
         firstName: firstName,
         lastName: lastName,
         email: email,
         role: "customer",
       };
-      const { dataResult, dataError } = await addData(
-        "users",
-        newUser,
-        newUserData
-      );
-      if (dataError) {
-        console.log(dataError);
-        setError(dataError);
-        return;
-      } else {
-        console.log(dataResult);
+
+      try {
+        const signUpResult = await addData("users", user.uid, newUserData);
+        return router.push("/");
+      } catch (err) {
+        if (errorCodeMessage.get(err.code) != null) {
+          setError(errorCodeMessage.get(err.code));
+        } else {
+          setError(
+            "Sorry we are experiencing technical difficulties right now. Please try again later."
+          );
+        }
       }
     }
-
-    // else successful
-    return router.push("/");
   };
+
   return (
     <form onSubmit={handleForm} className="form row y-gap-20">
       <div className="col-12">

@@ -38,29 +38,18 @@ const HeaderDashBoard = () => {
         <div className="header__container px-30 sm:px-20">
           <div className="-left-side">
             <Link href="/" className="header-logo">
-              <img src="/img/general/logo-dark.svg" alt="logo icon" />
+              <img src="/img/general/logo-light.svg" alt="logo icon" />
             </Link>
             {/* End logo */}
           </div>
           {/* End _left-side */}
 
-          <div className="row justify-between items-center pl-60 lg:pl-20">
+          <div className="row justify-between items-center">
             <div className="col-auto">
               <div className="d-flex items-center">
                 <button className="d-flex" onClick={handleToggle}>
                   <i className="icon-menu-2 text-20"></i>
                 </button>
-
-                <div className="single-field relative d-flex items-center md:d-none ml-30">
-                  <input
-                    className="pl-50 border-light text-dark-1 h-50 rounded-8"
-                    type="email"
-                    placeholder="Search"
-                  />
-                  <button className="absolute d-flex items-center h-full">
-                    <i className="icon-search text-20 px-15 text-dark-1"></i>
-                  </button>
-                </div>
               </div>
             </div>
             {/* End .col-auto */}

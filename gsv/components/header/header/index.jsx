@@ -2,8 +2,60 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+function LoginButtons() {
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
+
+  const logout = async (event) => {
+    console.log("Logging out");
+    auth.signOut();
+  };
+  if (user) {
+    console.log(user);
+    return (
+      <div>
+        <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+          <button
+            type="submit"
+            className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+        <div>
+          <Link
+            href="/login"
+            className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
+          >
+            Sign In
+          </Link>
+        </div>
+        <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+          <Link
+            href="signup"
+            className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
+          >
+            Register
+          </Link>
+        </div>
+      </div>
+    );
+  }
+}
 
 const Header = () => {
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
+
   const [navbar, setNavbar] = useState(false);
 
   const changeBackground = () => {
@@ -14,6 +66,7 @@ const Header = () => {
     }
   };
 
+  const userLoginButton = () => {};
   useEffect(() => {
     window.addEventListener("scroll", changeBackground);
   }, []);
@@ -44,25 +97,8 @@ const Header = () => {
             <div className="col-auto">
               <div className="d-flex items-center">
                 {/* Start btn-group */}
-                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
-                  <Link
-                    href="/login"
-                    className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
-                  >
-                    Sign In
-                  </Link>
-                </div>
-
-                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
-                  <Link
-                    href="signup"
-                    className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
-                  >
-                    Register
-                  </Link>
-                </div>
+                <LoginButtons></LoginButtons>
                 {/* End btn-group */}
-
                 {/* Start mobile menu icon */}
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   <div>

@@ -1,3 +1,5 @@
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import dynamic from "next/dynamic";
 import Seo from "../../components/common/Seo";
 import Footer from "../../components/footer";
@@ -10,7 +12,9 @@ import WhyChoose from "../../components/home/home/WhyChoose";
 import Cruise from "../../components/cruise/Cruise1";
 import SearchBoxContent from "../../components/hero/hero/SearchBoxContent";
 
-const home = () => {
+const Home = () => {
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
   return (
     <>
       <Seo pageTitle="Home" />
@@ -143,4 +147,4 @@ const home = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(home), { ssr: false });
+export default dynamic(() => Promise.resolve(Home), { ssr: false });
