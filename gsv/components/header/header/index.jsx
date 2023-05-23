@@ -3,20 +3,14 @@ import React, { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
 import getData from "/firebase/firestore/getData";
-import { getAuth } from "firebase/auth";
+import { auth, logout } from "../../../firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 
 function LoginButtons() {
-  const auth = getAuth();
   const [user, loading, error] = useAuthState(auth);
 
-  const logout = async (event) => {
-    console.log("Logging out");
-    auth.signOut();
-  };
-
-  if (user) {
+  if (user && user.displayName) {
     return (
       <div>
         <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
@@ -56,7 +50,6 @@ function LoginButtons() {
 }
 
 const Header = () => {
-  const auth = getAuth();
   const [user, loading, error] = useAuthState(auth);
 
   const [navbar, setNavbar] = useState(false);

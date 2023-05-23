@@ -1,55 +1,46 @@
 import Link from "next/link";
 
 import { pageItems, dashboardItems } from "../../data/mainMenuData";
+import { AdminPage } from "../../utils/utils";
 import {
   isActiveLink,
-  isActiveParentChaild,
+  isActiveParentChild,
 } from "../../utils/linkActiveChecker";
 import { useRouter } from "next/router";
-import { getAuth } from "firebase/auth";
+import { auth } from "../../firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
-import getData from "/firebase/firestore/getData";
 
 function AdminDashboard() {
   const router = useRouter();
-  const auth = getAuth();
-  const [user, loading, error] = useAuthState(auth);
-
-  if (user) {
-    const result = getData("users", user.uid);
-    console.log(result);
-    if (result.role == "admin") {
-      return (
-        <li
-          className={`${
-            isActiveParentChaild(dashboardItems, router.asPath) ? "current" : ""
-          } menu-item-has-children`}
-        >
-          <a href="#">
-            <span className="mr-10">Dashboard</span>
-            <i className="icon icon-chevron-sm-down" />
-          </a>
-          <ul className="subnav ">
-            {dashboardItems.map((menu, i) => (
-              <li
-                key={i}
-                className={
-                  isActiveLink(menu.routePath, router.asPath) ? "current" : ""
-                }
-              >
-                <Link href={menu.routePath}>{menu.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </li>
-      );
-    }
-  }
+  const admin = AdminPage();
+  if (admin == true)
+    return (
+      <li
+        className={`${
+          isActiveParentChild(dashboardItems, router.asPath) ? "current" : ""
+        } menu-item-has-children`}
+      >
+        <a href="#">
+          <span className="mr-10">Dashboard</span>
+          <i className="icon icon-chevron-sm-down" />
+        </a>
+        <ul className="subnav ">
+          {dashboardItems.map((menu, i) => (
+            <li
+              key={i}
+              className={
+                isActiveLink(menu.routePath, router.asPath) ? "current" : ""
+              }
+            >
+              <Link href={menu.routePath}>{menu.name}</Link>
+            </li>
+          ))}
+        </ul>
+      </li>
+    );
 }
 const MainMenu = ({ style = "" }) => {
   const router = useRouter();
-  const auth = getAuth();
-  const [user, loading, error] = useAuthState(auth);
 
   return (
     <nav className="menu js-navList">
@@ -78,7 +69,7 @@ const MainMenu = ({ style = "" }) => {
 
         <li
           className={`${
-            isActiveParentChaild(pageItems, router.asPath) ? "current" : ""
+            isActiveParentChild(pageItems, router.asPath) ? "current" : ""
           } menu-item-has-children`}
         >
           <a href="#">

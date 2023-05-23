@@ -19,7 +19,7 @@ import {
 import {
   isActiveLink,
   isActiveParent,
-  isActiveParentChaild,
+  isActiveParentChild,
 } from "../../utils/linkActiveChecker";
 import Social from "../common/social/Social";
 import ContactInfo from "./ContactInfo";
