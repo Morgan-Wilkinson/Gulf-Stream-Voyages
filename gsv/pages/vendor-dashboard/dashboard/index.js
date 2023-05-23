@@ -7,8 +7,24 @@ import ChartMain from "./components/ChartMain";
 import Link from "next/link";
 import RecentBooking from "./components/RecentBooking";
 import Footer from "../common/Footer";
+import getData from "/firebase/firestore/getData";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/navigation";
 
-const index = () => {
+const Index = () => {
+  const router = useRouter();
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
+
+  if (user) {
+    const result = getData("users", user.uid);
+    if (result) {
+      console.log(result);
+    }
+  } else {
+    return router.push("/");
+  }
   return (
     <>
       <Seo pageTitle="Vendor Dashboard" />
@@ -91,4 +107,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

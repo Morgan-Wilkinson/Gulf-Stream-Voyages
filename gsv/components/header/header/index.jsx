@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
+import getData from "/firebase/firestore/getData";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/router";
 
 function LoginButtons() {
   const auth = getAuth();
@@ -13,11 +15,12 @@ function LoginButtons() {
     console.log("Logging out");
     auth.signOut();
   };
+
   if (user) {
-    console.log(user);
     return (
       <div>
         <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+          <p className="px-10">Welcome {user.displayName}</p>
           <button
             type="submit"
             className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
@@ -66,7 +69,6 @@ const Header = () => {
     }
   };
 
-  const userLoginButton = () => {};
   useEffect(() => {
     window.addEventListener("scroll", changeBackground);
   }, []);

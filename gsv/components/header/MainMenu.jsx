@@ -6,9 +6,50 @@ import {
   isActiveParentChaild,
 } from "../../utils/linkActiveChecker";
 import { useRouter } from "next/router";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import getData from "/firebase/firestore/getData";
 
+function AdminDashboard() {
+  const router = useRouter();
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
+
+  if (user) {
+    const result = getData("users", user.uid);
+    console.log(result);
+    if (result.role == "admin") {
+      return (
+        <li
+          className={`${
+            isActiveParentChaild(dashboardItems, router.asPath) ? "current" : ""
+          } menu-item-has-children`}
+        >
+          <a href="#">
+            <span className="mr-10">Dashboard</span>
+            <i className="icon icon-chevron-sm-down" />
+          </a>
+          <ul className="subnav ">
+            {dashboardItems.map((menu, i) => (
+              <li
+                key={i}
+                className={
+                  isActiveLink(menu.routePath, router.asPath) ? "current" : ""
+                }
+              >
+                <Link href={menu.routePath}>{menu.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    }
+  }
+}
 const MainMenu = ({ style = "" }) => {
   const router = useRouter();
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
 
   return (
     <nav className="menu js-navList">
@@ -58,29 +99,7 @@ const MainMenu = ({ style = "" }) => {
           </ul>
         </li>
         {/* End pages items */}
-
-        <li
-          className={`${
-            isActiveParentChaild(dashboardItems, router.asPath) ? "current" : ""
-          } menu-item-has-children`}
-        >
-          <a href="#">
-            <span className="mr-10">Dashboard</span>
-            <i className="icon icon-chevron-sm-down" />
-          </a>
-          <ul className="subnav ">
-            {dashboardItems.map((menu, i) => (
-              <li
-                key={i}
-                className={
-                  isActiveLink(menu.routePath, router.asPath) ? "current" : ""
-                }
-              >
-                <Link href={menu.routePath}>{menu.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </li>
+        <AdminDashboard></AdminDashboard>
       </ul>
     </nav>
   );

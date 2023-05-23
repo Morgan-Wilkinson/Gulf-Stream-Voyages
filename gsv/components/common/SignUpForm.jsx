@@ -2,9 +2,13 @@
 import React from "react";
 import Link from "next/link";
 import addData from "/firebase/firestore/addData";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
 
 function SignUpForm() {
   const router = useRouter();
@@ -65,42 +69,71 @@ function SignUpForm() {
         auth,
         email,
         password
-      );
-      console.log(signUpResult);
-      console.log(signUpResult.user.uid);
+      ).then(async () => {
+        // Updating user name
+        updateProfile(auth.currentUser, {
+          displayName: firstName + " " + lastName,
+        });
+
+        if (auth.currentUser) {
+          const newUserData = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            role: "customer",
+          };
+
+          try {
+            const signUpResult = await addData(
+              "users",
+              auth.currentUser.uid,
+              newUserData
+            );
+            return router.push("/");
+          } catch (err) {
+            if (errorCodeMessage.get(err.code) != null) {
+              setError(errorCodeMessage.get(err.code));
+            } else {
+              setError(
+                "Sorry we are experiencing technical difficulties right now. Please try again later."
+              );
+            }
+          }
+        }
+      });
     } catch (err) {
       if (errorCodeMessage.get(err.code) != null) {
         setError(errorCodeMessage.get(err.code));
       } else {
         setError(
-          "Sorry we are experiencing technical difficulties right now. Please try again later."
+          "Sorry we are experiencing technical difficulties right now. Please try again later. Error code: " +
+            err.code
         );
       }
       return;
     }
 
-    if (user) {
-      console.log(user);
-      const newUserData = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        role: "customer",
-      };
+    // if (user) {
+    //   const newUserData = {
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     email: email,
+    //     role: "customer",
+    //   };
 
-      try {
-        const signUpResult = await addData("users", user.uid, newUserData);
-        return router.push("/");
-      } catch (err) {
-        if (errorCodeMessage.get(err.code) != null) {
-          setError(errorCodeMessage.get(err.code));
-        } else {
-          setError(
-            "Sorry we are experiencing technical difficulties right now. Please try again later."
-          );
-        }
-      }
-    }
+    //   try {
+    //     const signUpResult = await addData("users", user.uid, newUserData);
+    //     return router.push("/");
+    //   } catch (err) {
+    //     if (errorCodeMessage.get(err.code) != null) {
+    //       setError(errorCodeMessage.get(err.code));
+    //     } else {
+    //       setError(
+    //         "Sorry we are experiencing technical difficulties right now. Please try again later."
+    //       );
+    //     }
+    //   }
+    // }
   };
 
   return (
@@ -187,7 +220,7 @@ function SignUpForm() {
       {/* End .col */}
 
       <div>
-        <p style={{ color: "red" }}>{error}</p>
+        <p style={{ color: "red" }}>{shownError}</p>
       </div>
       {/*Error Message*/}
       <div className="col-12">

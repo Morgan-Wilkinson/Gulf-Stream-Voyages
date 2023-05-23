@@ -46,7 +46,6 @@ const LoginForm = () => {
         password
       );
 
-      console.log(signInResult.user.uid);
       return router.push("/");
     } catch (err) {
       if (errorCodeMessage.get(err.code) != null) {

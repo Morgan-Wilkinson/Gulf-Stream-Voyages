@@ -2,7 +2,6 @@ import { firestore } from "../app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 export default async function addData(collection, id, data) {
-  console.log(firestore);
   let dataResult = null;
   let dataError = null;
 
