@@ -1,16 +1,18 @@
+import { useState } from "react";
 import { db } from "../app";
 import { doc, getDoc } from "firebase/firestore";
 
 export default async function getData(collection, id) {
-  const docSnap = await getDoc(doc(db, collection, id));
-  var resultData;
-  if (docSnap.exists()) {
-    resultData = docSnap.data();
-    console.log("Document data:", resultData);
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-  }
+  var resultData = localStorage.getItem(collection);
+  if (resultData == null) {
+    const docSnap = await getDoc(doc(db, collection, id));
 
+    if (docSnap.exists()) {
+      localStorage.setItem(collection, JSON.stringify(docSnap.data()));
+      resultData = localStorage.getItem(collection);
+    } else {
+      console.log("No such document!");
+    }
+  }
   return resultData;
 }
