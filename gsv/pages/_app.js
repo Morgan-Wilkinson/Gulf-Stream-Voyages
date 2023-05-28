@@ -8,8 +8,6 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-cards";
 import "aos/dist/aos.css";
 import "../styles/index.scss";
-import { Provider } from "react-redux";
-import { store } from "../app/store";
 import { AuthContextProvider } from "../firebase/AuthContext";
 
 if (typeof window !== "undefined") {

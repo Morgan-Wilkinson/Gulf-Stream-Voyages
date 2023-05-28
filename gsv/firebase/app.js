@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import getData from "./firestore/getData";
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -39,6 +40,10 @@ const errorCodeMessage = new Map([
   ["auth/invalid-verification-code", "Invalid Verification Code"],
   ["auth/invalid-verification-id", "Invalid Verification Id"],
   ["auth/invalid-credential", "Expired credentials"],
+  [
+    "auth/too-many-requests",
+    "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
+  ],
 ]);
 
 const firebaseConfig = {
@@ -57,6 +62,7 @@ const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 const signInWithGoogle = async () => {
+  var result;
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
@@ -73,14 +79,18 @@ const signInWithGoogle = async () => {
         authProvider: "google",
         email: user.email,
         role: "customer",
+      }).then(() => {
+        getData("users", user.uid);
       });
     }
   } catch (err) {
     console.error(err);
-    alert(errorCodeMessage.get(err.code));
+    result = { status: false, error: errorCodeMessage.get(err.code) };
+    return result;
   }
 };
 const signInWithFacebook = async () => {
+  var result;
   try {
     const res = await signInWithPopup(auth, facebookProvider);
     const user = res.user;
@@ -100,22 +110,32 @@ const signInWithFacebook = async () => {
         authProvider: "google",
         email: user.email,
         role: "customer",
+      }).then(() => {
+        getData("users", user.uid);
       });
     }
   } catch (err) {
     console.error(err);
-    alert(errorCodeMessage.get(err.code));
+    result = { status: false, error: errorCodeMessage.get(err.code) };
+    return result;
   }
 };
 const logInWithEmailAndPassword = async (email, password) => {
+  var result;
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password).then(
+      (userCredential) => {
+        getData("users", userCredential.user.uid);
+      }
+    );
   } catch (err) {
     console.error(err);
-    alert(errorCodeMessage.get(err.code));
+    result = { status: false, error: errorCodeMessage.get(err.code) };
+    return result;
   }
 };
 const registerWithEmailAndPassword = async (name, email, password) => {
+  var result;
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
@@ -128,10 +148,13 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       authProvider: "local",
       email,
       role: "customer",
+    }).then(() => {
+      getData("users", user.uid);
     });
   } catch (err) {
     console.error(err);
-    alert(errorCodeMessage.get(err.code));
+    result = { status: false, error: errorCodeMessage.get(err.code) };
+    return result;
   }
 };
 const sendPasswordReset = async (email) => {

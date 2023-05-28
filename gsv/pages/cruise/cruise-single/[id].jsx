@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "photoswipe/dist/photoswipe.css";
 import cruiseData from "../../../data/cruise";
 import Seo from "../../../components/common/Seo";
-import Header11 from "../../../components/header/header-11";
+import Header from "../../../components/header/header";
 import Overview from "../../../components/cruise-single/Overview";
 import TopBreadCrumb from "../../../components/cruise-single/TopBreadCrumb";
 import SidebarRight from "../../../components/cruise-single/SidebarRight";
@@ -14,7 +14,7 @@ import ReplyForm from "../../../components/cruise-single/ReplyForm";
 import ReplyFormReview from "../../../components/cruise-single/ReplyFormReview";
 import Facilities from "../../../components/cruise-single/Facilities";
 import CallToActions from "../../../components/common/CallToActions";
-import Footer from "../../../components/footer/default";
+import Footer from "../../../components/footer";
 import MapPropertyFinder from "../../../components/cruise-single/MapPropertyFinder";
 import GalleryCruiseSlider from "../../../components/cruise-single/GalleryCruiseSlider";
 
@@ -38,7 +38,7 @@ const CruiseSingleV1Dynamic = () => {
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <Header11 />
+      <Header />
       {/* End Header 1 */}
 
       <TopBreadCrumb />

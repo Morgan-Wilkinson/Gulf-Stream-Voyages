@@ -2,7 +2,6 @@ import Seo from "../../../components/common/Seo";
 import Sidebar from "../common/Sidebar";
 import Header from "../../../components/header/dashboard-header";
 import Footer from "../common/Footer";
-import WishlistTable from "./components/WishlistTable";
 
 const index = () => {
   return (
@@ -34,12 +33,6 @@ const index = () => {
               {/* End .col-12 */}
             </div>
             {/* End .row */}
-
-            <div className="py-30 px-30 rounded-4 bg-white shadow-3">
-              <WishlistTable />
-              {/* End tabs */}
-            </div>
-
             <Footer />
           </div>
           {/* End .dashboard__content */}

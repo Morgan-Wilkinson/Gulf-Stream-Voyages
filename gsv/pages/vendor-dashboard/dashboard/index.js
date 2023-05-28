@@ -9,11 +9,12 @@ import Link from "next/link";
 import RecentBooking from "./components/RecentBooking";
 import Footer from "../common/Footer";
 import { AdminPage } from "../../../utils/utils";
+import { useRouter } from "next/navigation";
 
 const Index = () => {
-  useEffect(() => {});
   const admin = AdminPage();
-  if (admin == true)
+  const router = useRouter();
+  if (admin == true) {
     return (
       <>
         <Seo pageTitle="Vendor Dashboard" />
@@ -96,6 +97,9 @@ const Index = () => {
         {/* End dashbaord content */}
       </>
     );
+  } else {
+    if (router.isFallback) return router.push("/");
+  }
 };
 
 export default Index;
