@@ -58,20 +58,17 @@ function SignUpForm() {
       return;
     }
 
-    try {
-      registerWithEmailAndPassword(firstName + " " + lastName, email, password);
-      return router.push("/");
-    } catch (err) {
-      if (errorCodeMessage.get(err.code) != null) {
-        setError(errorCodeMessage.get(err.code));
+    registerWithEmailAndPassword(
+      firstName + " " + lastName,
+      email,
+      password
+    ).then((result) => {
+      if (auth.currentUser) {
+        router.push("/");
       } else {
-        setError(
-          "Sorry we are experiencing technical difficulties right now. Please try again later. Error code: " +
-            err.code
-        );
+        setError(result.error);
       }
-      return;
-    }
+    });
   };
 
   return (

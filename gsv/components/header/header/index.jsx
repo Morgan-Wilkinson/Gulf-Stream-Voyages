@@ -2,7 +2,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
-import getData from "/firebase/firestore/getData";
 import { auth, logout } from "../../../firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";

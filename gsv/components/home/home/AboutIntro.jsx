@@ -1,3 +1,4 @@
+import Link from "next/link";
 const AboutIntro = () => {
   return (
     <section className="section-bg layout-pt-lg layout-pb-lg">
@@ -24,15 +25,16 @@ const AboutIntro = () => {
               Gulf Stream Voyages is a World Class Cruise Booking Platform
             </h2>
             <p className="text-dark-1 mt-40 lg:mt-20 sm:mt-15">
-              We specialize in providing exquisite and personalized voyages around South Florida.
+              We specialize in providing exquisite and personalized voyages
+              around South Florida.
             </p>
             <div className="d-inline-block mt-40 lg:mt-30 sm:mt-20">
-              <a
+              <Link
                 href="/about"
                 className="button -md -blue-1 bg-yellow-1 text-dark-1"
               >
                 Learn More <div className="icon-arrow-top-right ml-15" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

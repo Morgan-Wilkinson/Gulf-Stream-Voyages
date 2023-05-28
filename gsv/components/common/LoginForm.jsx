@@ -3,11 +3,15 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  auth,
+  logInWithEmailAndPassword,
+  signInWithGoogle,
+  signInWithFacebook,
+} from "../../firebase/app";
 
 const LoginForm = () => {
   const router = useRouter();
-  const auth = getAuth();
   const [shownError, setError] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -39,24 +43,13 @@ const LoginForm = () => {
     if (error) setError("");
     if (shownError) setError("");
 
-    try {
-      const signInResult = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      return router.push("/");
-    } catch (err) {
-      if (errorCodeMessage.get(err.code) != null) {
-        setError(errorCodeMessage.get(err.code));
+    logInWithEmailAndPassword(email, password).then((result) => {
+      if (auth.currentUser) {
+        router.push("/");
       } else {
-        setError(
-          "Sorry we are experiencing technical difficulties right now. Please try again later."
-        );
+        setError(result.error);
       }
-      return;
-    }
+    });
   };
   return (
     <form onSubmit={handleForm} className="form row y-gap-20">
