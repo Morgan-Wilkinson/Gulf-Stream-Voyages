@@ -11,7 +11,6 @@ import {
 } from "react-pro-sidebar";
 import {
   homeItems,
-  blogItems,
   pageItems,
   dashboardItems,
   categorieMobileItems,
@@ -114,27 +113,6 @@ const MobileMenu = () => {
               Desitinations
             </MenuItem>
             {/* End  Desitinations Menu */}
-
-            <SubMenu label="Blog">
-              {blogItems.map((item, i) => (
-                <MenuItem
-                  key={i}
-                  component={
-                    <Link
-                      href={item.routePath}
-                      className={
-                        isActiveLink(item.routePath, router.asPath)
-                          ? "menu-active-link"
-                          : ""
-                      }
-                    />
-                  }
-                >
-                  {item.name}
-                </MenuItem>
-              ))}
-            </SubMenu>
-            {/* End  All Blog Menu */}
 
             <SubMenu label="Pages">
               {pageItems.map((item, i) => (

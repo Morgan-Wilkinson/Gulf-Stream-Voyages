@@ -25,7 +25,7 @@ import {
 const errorCodeMessage = new Map([
   [
     "auth/account-exists-with-different-credential",
-    "There is already an Account associated with this crendetial",
+    "There is already an Account associated with this credential",
   ],
   ["auth/email-already-in-use", "Email already in use"],
   ["auth/invalid-email", "Invalid email"],
