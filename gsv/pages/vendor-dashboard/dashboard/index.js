@@ -11,7 +11,7 @@ import Footer from "../common/Footer";
 import { AdminPage } from "../../../utils/utils";
 import { useRouter } from "next/navigation";
 
-const Index = () => {
+export default function VendorDashboard() {
   const admin = AdminPage();
   const router = useRouter();
   if (admin == true) {
@@ -92,14 +92,12 @@ const Index = () => {
             </div>
             {/* End .dashboard__content */}
           </div>
-          {/* End dashbaord content */}
+          {/* End dashboard content */}
         </div>
-        {/* End dashbaord content */}
+        {/* End dashboard content */}
       </>
     );
-  } else {
-    if (router.isFallback) return router.push("/");
+  } else if (typeof window !== "undefined") {
+    return router.push("/404");
   }
-};
-
-export default Index;
+}
