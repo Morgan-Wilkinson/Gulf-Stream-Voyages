@@ -1,5 +1,5 @@
-import HotelContent from "./content/HotelContent";
-import HotelPolicy from "./content/HotelPolicy";
+import BoatContent from "./content/BoatContent";
+import BoatPolicy from "./content/BoatPolicy";
 import BannerUploader from "./content/BannerUploader";
 import FeaturedUploader from "./content/FeaturedUploader";
 import GalleryUploader from "./content/GalleryUploader";
@@ -8,9 +8,9 @@ const ContentTabContent = () => {
   return (
     <>
       <div className="col-xl-10">
-        <div className="text-18 fw-500 mb-10">Hotel Content</div>
-        <HotelContent />
-        {/* End HotelContent */}
+        <div className="text-18 fw-500 mb-10">Boat Content</div>
+        <BoatContent />
+        {/* End BoatContent */}
 
         <div className="mt-30">
           <div className="fw-500">Banner Image</div>
@@ -26,9 +26,9 @@ const ContentTabContent = () => {
 
         <div className="border-top-light mt-30 mb-30" />
 
-        <div className="text-18 fw-500 mb-10">Hotel Policy</div>
-        <HotelPolicy />
-        {/* End hotelpolicy */}
+        <div className="text-18 fw-500 mb-10">Boat Policy</div>
+        <BoatPolicy />
+        {/* End BoatPolicy */}
 
         <div className="mt-30">
           <div className="fw-500">Featured Image</div>
