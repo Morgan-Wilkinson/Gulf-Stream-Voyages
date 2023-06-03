@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, registerWithEmailAndPassword } from "../../firebase/app";
+import { auth, RegisterWithEmailAndPassword } from "../../firebase/app";
 
 function SignUpForm() {
   const router = useRouter();
@@ -58,7 +58,7 @@ function SignUpForm() {
       return;
     }
 
-    registerWithEmailAndPassword(
+    RegisterWithEmailAndPassword(
       firstName + " " + lastName,
       email,
       password

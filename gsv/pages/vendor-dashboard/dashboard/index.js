@@ -8,13 +8,15 @@ import ChartMain from "./components/ChartMain";
 import Link from "next/link";
 import RecentBooking from "./components/RecentBooking";
 import Footer from "../common/Footer";
-import { AdminPage } from "../../../utils/utils";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { UserContext } from "../../_app";
 
 export default function VendorDashboard() {
-  const admin = AdminPage();
   const router = useRouter();
-  if (admin == true) {
+  const userContext = useContext(UserContext);
+  console.log(userContext);
+  if (userContext != null && userContext.admin == true) {
     return (
       <>
         <Seo pageTitle="Vendor Dashboard" />

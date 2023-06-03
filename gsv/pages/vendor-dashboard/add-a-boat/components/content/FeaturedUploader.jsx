@@ -7,7 +7,7 @@ const FeaturedUploader = () => {
   const handleFileUpload = (event) => {
     const fileList = event.target.files;
     const newImages = [];
-    const maxSize = 800; // in pixels
+    const maxSize = 2000; // in pixels
 
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
@@ -69,7 +69,7 @@ const FeaturedUploader = () => {
             onChange={handleFileUpload}
           />
           <div className="text-start mt-10 text-14 text-light-1">
-            PNG or JPG no bigger than 800px wide and tall.
+            PNG or JPG no bigger than 2000px wide and tall.
           </div>
         </div>
       </div>

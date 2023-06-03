@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   auth,
-  logInWithEmailAndPassword,
-  signInWithGoogle,
-  signInWithFacebook,
+  LogInWithEmailAndPassword,
+  SignInWithGoogle,
+  SignInWithFacebook,
 } from "../../firebase/app";
 
 const LoginForm = () => {
@@ -43,10 +43,10 @@ const LoginForm = () => {
     if (error) setError("");
     if (shownError) setError("");
 
-    logInWithEmailAndPassword(email, password).then((result) => {
+    LogInWithEmailAndPassword(email, password).then((result) => {
       if (auth.currentUser) {
         router.push("/");
-      } else {
+      } else if (result.error != null) {
         setError(result.error);
       }
     });

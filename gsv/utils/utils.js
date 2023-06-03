@@ -21,20 +21,12 @@ export const AdminPage = () => {
     if (User == null) {
       new User();
     }
-    console.log(User.admin);
     if (User.admin != true && router.pathname.includes(adminPagePathRoot)) {
-      return router.push("/");
+      return false;
     } else {
       return true;
     }
-  } else {
+  } else if (typeof window !== "undefined") {
     return false;
-  }
-};
-
-export const GetUserData = () => {
-  const [user, loading, error] = useAuthState(auth);
-  if (user && user.uid && typeof window !== "undefined") {
-    const result = getData("users", user.uid);
   }
 };

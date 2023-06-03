@@ -3,51 +3,60 @@ import Sidebar from "../common/Sidebar";
 import Header from "../../../components/header/dashboard-header";
 import BoatForm from "./components/index";
 import Footer from "../common/Footer";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../../pages/_app";
 
-const index = () => {
-  return (
-    <>
-      <Seo pageTitle="Vendor Add Hotel" />
-      {/* End Page Title */}
+export default function VendorAddBoat() {
+  const router = useRouter();
+  const userContext = useContext(UserContext);
 
-      <div className="header-margin"></div>
+  if (userContext != null && userContext.admin == true) {
+    return (
+      <>
+        <Seo pageTitle="Vendor Add Hotel" />
+        {/* End Page Title */}
 
-      <Header />
-      {/* End dashboard-header */}
+        <div className="header-margin"></div>
 
-      <div className="dashboard">
-        <div className="dashboard__sidebar bg-white scroll-bar-1">
-          <Sidebar />
-          {/* End sidebar */}
-        </div>
-        {/* End dashboard__sidebar */}
+        <Header />
+        {/* End dashboard-header */}
 
-        <div className="dashboard__main">
-          <div className="dashboard__content bg-light-2">
-            <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
-              <div className="col-12">
-                <h1 className="text-30 lh-14 fw-600">Add a Boat</h1>
-                <div className="text-15 text-light-1">
-                  Fill out the following form to add a new boat to the website.
-                </div>
-              </div>
-              {/* End .col-12 */}
-            </div>
-            {/* End .row */}
-
-            <div className="py-30 px-30 rounded-4 bg-white shadow-3">
-              <BoatForm />
-            </div>
-
-            <Footer />
+        <div className="dashboard">
+          <div className="dashboard__sidebar bg-white scroll-bar-1">
+            <Sidebar />
+            {/* End sidebar */}
           </div>
-          {/* End .dashboard__content */}
+          {/* End dashboard__sidebar */}
+
+          <div className="dashboard__main">
+            <div className="dashboard__content bg-light-2">
+              <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
+                <div className="col-12">
+                  <h1 className="text-30 lh-14 fw-600">Add a Boat</h1>
+                  <div className="text-15 text-light-1">
+                    Fill out the following form to add a new boat to the
+                    website.
+                  </div>
+                </div>
+                {/* End .col-12 */}
+              </div>
+              {/* End .row */}
+
+              <div className="py-30 px-30 rounded-4 bg-white shadow-3">
+                <BoatForm />
+              </div>
+
+              <Footer />
+            </div>
+            {/* End .dashboard__content */}
+          </div>
+          {/* End dashbaord content */}
         </div>
         {/* End dashbaord content */}
-      </div>
-      {/* End dashbaord content */}
-    </>
-  );
-};
-
-export default index;
+      </>
+    );
+  } else if (typeof window !== "undefined") {
+    return router.push("/404");
+  }
+}

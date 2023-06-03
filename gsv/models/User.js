@@ -1,30 +1,31 @@
 class User {
-  static authProvider;
-  static name;
-  static firstName;
-  static lastName;
-  static email;
-  static uid;
-  static role;
-  static admin;
+  static obj =
+    typeof window !== "undefined" && localStorage.getItem("users")
+      ? JSON.parse(localStorage.getItem("users"))
+      : null;
+  static authProvider =
+    this.obj != null && this.obj.authProvider != null
+      ? this.obj.authProvider
+      : "";
+  static name = this.obj != null && this.obj.name != null ? this.obj.name : "";
+  static firstName = this.obj != null ? User.getFirstName(this.obj.name) : "";
+  static lastName = this.obj != null ? User.getLastName(this.obj.name) : "";
+  static email =
+    this.obj != null && this.obj.email != null ? this.obj.email : "";
+  static uid = this.obj != null && this.obj.uid != null ? this.obj.uid : "";
+  static role = this.obj != null && this.obj.role != null ? this.obj.role : "";
+  static admin = this.obj != null && User.isAdmin(this.obj.role) ? true : false;
 
-  static {
-    if (typeof window !== "undefined") {
-      var obj = localStorage.getItem("users")
-        ? JSON.parse(localStorage.getItem("users"))
-        : null;
-
-      if (obj != null) {
-        this.authProvider = obj.authProvider != null ? obj.authProvider : "";
-        this.name = obj.name != null ? obj.name : "";
-        this.firstName = User.getFirstName(obj.name);
-        this.lastName = User.getLastName(obj.name);
-        this.email = obj.email != null ? obj.email : "";
-        this.uid = obj.uid != null ? obj.uid : "";
-        this.role = obj.role != null ? obj.role : "";
-        this.admin = User.isAdmin(obj.role) ? true : false;
-      }
-    }
+  static updateUser(obj) {
+    this.authProvider =
+      obj != null && obj.authProvider != null ? obj.authProvider : "";
+    this.name = obj != null && obj.name != null ? obj.name : "";
+    this.firstName = obj != null ? User.getFirstName(obj.name) : "";
+    this.lastName = obj != null ? User.getLastName(obj.name) : "";
+    this.email = obj != null && obj.email != null ? obj.email : "";
+    this.uid = obj != null && obj.uid != null ? obj.uid : "";
+    this.role = obj != null && obj.role != null ? obj.role : "";
+    this.admin = obj != null && User.isAdmin(obj.role) ? true : false;
   }
 
   static isAdmin(role) {

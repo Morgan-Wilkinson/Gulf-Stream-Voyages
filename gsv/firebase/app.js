@@ -61,7 +61,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
-const signInWithGoogle = async () => {
+const SignInWithGoogle = async () => {
   var result;
   try {
     const res = await signInWithPopup(auth, googleProvider);
@@ -89,7 +89,7 @@ const signInWithGoogle = async () => {
     return result;
   }
 };
-const signInWithFacebook = async () => {
+const SignInWithFacebook = async () => {
   var result;
   try {
     const res = await signInWithPopup(auth, facebookProvider);
@@ -120,21 +120,18 @@ const signInWithFacebook = async () => {
     return result;
   }
 };
-const logInWithEmailAndPassword = async (email, password) => {
+const LogInWithEmailAndPassword = async (email, password) => {
   var result;
   try {
-    await signInWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
-        getData("users", userCredential.user.uid);
-      }
-    );
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    await getData("users", res.user.uid);
   } catch (err) {
     console.error(err);
     result = { status: false, error: errorCodeMessage.get(err.code) };
     return result;
   }
 };
-const registerWithEmailAndPassword = async (name, email, password) => {
+const RegisterWithEmailAndPassword = async (name, email, password) => {
   var result;
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -157,7 +154,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     return result;
   }
 };
-const sendPasswordReset = async (email) => {
+const SendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
     alert("Password reset link sent!");
@@ -166,17 +163,17 @@ const sendPasswordReset = async (email) => {
     alert(errorCodeMessage.get(err.code));
   }
 };
-const logout = () => {
+function Logout() {
   signOut(auth);
   localStorage.clear();
-};
+}
 export {
   auth,
   db,
-  signInWithGoogle,
-  signInWithFacebook,
-  logInWithEmailAndPassword,
-  registerWithEmailAndPassword,
-  sendPasswordReset,
-  logout,
+  SignInWithGoogle,
+  SignInWithFacebook,
+  LogInWithEmailAndPassword,
+  RegisterWithEmailAndPassword,
+  SendPasswordReset,
+  Logout,
 };

@@ -2,25 +2,20 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
-import { auth, logout } from "../../../firebase/app";
+import { auth } from "../../../firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../../../pages/_app";
+import LogoutAndRedirect from "../../../components/common/LogoutAndRedirect";
 
-function LoginButtons() {
+const LoginButtons = () => {
   const [user, loading, error] = useAuthState(auth);
-
   if (user && user.displayName) {
     return (
       <div>
         <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
           <p className="px-10">Welcome {user.displayName}</p>
-          <button
-            type="submit"
-            className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
-            onClick={logout}
-          >
-            Logout
-          </button>
+          <LogoutAndRedirect></LogoutAndRedirect>
         </div>
       </div>
     );
@@ -46,12 +41,12 @@ function LoginButtons() {
       </div>
     );
   }
-}
+};
 
 const Header = () => {
-  const [user, loading, error] = useAuthState(auth);
-
   const [navbar, setNavbar] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
+  const userContext = useContext(UserContext);
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -64,6 +59,22 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", changeBackground);
   }, []);
+
+  useEffect(() => {
+    if (
+      userContext == null ||
+      userContext.obj == null ||
+      userContext.email == ""
+    ) {
+      const obj = localStorage.getItem("users")
+        ? JSON.parse(localStorage.getItem("users"))
+        : null;
+      if (obj != null) {
+        userContext.updateUser(obj);
+        if (typeof window !== "undefined") window.location.reload();
+      }
+    }
+  }, [user, userContext]);
 
   return (
     <>

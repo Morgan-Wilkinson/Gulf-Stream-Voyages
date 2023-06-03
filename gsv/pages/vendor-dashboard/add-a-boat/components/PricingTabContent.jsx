@@ -6,7 +6,7 @@ const PricingTabContent = () => {
           <div className="text-18 fw-500 mb-10">Pricing</div>
           <div className="form-input ">
             <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">Hotel Price</label>
+            <label className="lh-1 text-16 text-light-1">Boat Price</label>
           </div>
 
           <div className="d-flex mt-20">
