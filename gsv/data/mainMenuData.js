@@ -64,16 +64,16 @@ export const dashboardItems = [
     routePath: "/vendor-dashboard/dashboard",
   },
   {
-    name: "Vendor Add Hotel",
-    routePath: "/vendor-dashboard/add-hotel",
+    name: "Vendor Add Boat",
+    routePath: "/vendor-dashboard/add-a-boat",
   },
   {
     name: "Vendor Booking",
     routePath: "/vendor-dashboard/booking",
   },
   {
-    name: "Vendor Hotels",
-    routePath: "/vendor-dashboard/hotels",
+    name: "Vendor Boats",
+    routePath: "/vendor-dashboard/Boats",
   },
   {
     name: "Vendor Recovery",

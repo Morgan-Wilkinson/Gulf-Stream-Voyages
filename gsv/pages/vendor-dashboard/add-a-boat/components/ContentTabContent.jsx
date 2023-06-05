@@ -13,6 +13,11 @@ const ContentTabContent = () => {
         {/* End BoatContent */}
 
         <div className="mt-30">
+          <div className="fw-500">Featured Image</div>
+          <FeaturedUploader />
+        </div>
+
+        <div className="mt-30">
           <div className="fw-500">Banner Image</div>
           <BannerUploader />
         </div>
@@ -30,10 +35,6 @@ const ContentTabContent = () => {
         <BoatPolicy />
         {/* End BoatPolicy */}
 
-        <div className="mt-30">
-          <div className="fw-500">Featured Image</div>
-          <FeaturedUploader />
-        </div>
         {/* End FeaturedUploader */}
 
         <div className="d-inline-block pt-30">

@@ -1,57 +1,77 @@
 import React, { useState, useEffect } from "react";
 
+const BoatPolicyQuestions = () => {
+  const [policyQuestion, setPolicyQuestion] = useState("");
+  const [policyAnswer, setPolicyAnswer] = useState("");
+
+  return (
+    <>
+      <tr>
+        <td className="col-5">
+          <div className="form-input ">
+            <input
+              type="text"
+              onChange={(event) => setPolicyQuestion(event.target.value)}
+              required
+            />
+            <label className="lh-1 text-16 text-light-1">Question?</label>
+          </div>
+        </td>
+        {/* End td */}
+
+        <td className="col-7">
+          <div className="form-input ">
+            <input
+              type="text"
+              onChange={(event) => setPolicyAnswer(event.target.value)}
+              required
+            />
+            <label className="lh-1 text-16 text-light-1">Answer!</label>
+          </div>
+        </td>
+        {/* End td */}
+      </tr>
+    </>
+  );
+};
+
 const BoatPolicy = () => {
-  const [questionPolicyMap, setQuestionPolicyMap] = useState([
-    {
-      id: "0",
-      question: "Eg: Which footwear is most suitable?",
-      policy: "Sneakers!",
-    },
-    {
-      id: "1",
-      question: "Eg: Which excursion type is this boat most suitable?",
-      policy: "Long ones, deep fishing",
-    },
+  const [error, setError] = useState("");
+  const [policyQuestionList, setPolicyQuestionList] = useState([
+    BoatPolicyQuestions(),
   ]);
 
   function AddItem() {
-    setQuestionPolicyMap((questionPolicyMap) => [
-      ...questionPolicyMap,
-      {
-        id: questionPolicyMap.length + 1,
-        question: "Eg: Which footwear is most suitable?",
-        policy: "Sneakers!",
-      },
+    setPolicyQuestionList((policyQuestionList) => [
+      ...policyQuestionList,
+      BoatPolicyQuestions(),
     ]);
-    console.log("Pushed New Size = " + questionPolicyMap.length);
+    console.log("Pushed New Size = " + policyQuestionList.length);
   }
 
-  function DeleteItem(id) {
-    setQuestionPolicyMap((questionPolicyMap) =>
-      questionPolicyMap.filter((element) => element.id !== id)
-    );
-
-    // function UpdateItem(element) {
-    //   let i
-    //   setQuestionPolicyMap((questionPolicyMap) =>
-    //     questionPolicyMap.filter((element) => element.id !== id)
-    //   );
-    // }
+  function DeleteItem(element) {
+    console.log(policyQuestionList.length);
+    if (policyQuestionList.length > 1) {
+      setPolicyQuestionList((policyQuestionList) =>
+        policyQuestionList.filter((element) => element !== element)
+      );
+    } else {
+      setError("Minimum of at least 1 policy is required.");
+      alert(error);
+    }
   }
+
+  // function UpdateQuestion(item) {
+  //   console.log(item);
+  //   // console.log(event.target);
+  //   // setQuestionPolicyMap((questionPolicyMap) =>
+  //   //   questionPolicyMap.filter((element) => element.id !== id)
+  //   // );
+  // }
+
+  // function UpdateAnswer(id) {}
   return (
     <>
-      <div className="row x-gap-20 y-gap-20">
-        <div className="col-12">
-          <div className="form-input ">
-            <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">
-              Boat rating standard
-            </label>
-          </div>
-        </div>
-      </div>
-      {/* End boat rating standard */}
-
       <div className="mt-20">
         <div className="fw-500 mb-20">Policy</div>
         <div className="overflow-scroll scroll-bar-1">
@@ -66,41 +86,20 @@ const BoatPolicy = () => {
             {/* End thead */}
 
             <tbody>
-              {questionPolicyMap.map((element) => (
-                <tr key={element.id}>
-                  <td className="col-5">
-                    <div className="form-input ">
-                      <input type="text" required />
-                      <label className="lh-1 text-16 text-light-1">
-                        {element.question}
-                      </label>
-                    </div>
-                  </td>
-                  {/* End td */}
-
-                  <td className="col-7">
-                    <div className="form-input ">
-                      <textarea required rows={5} defaultValue={""} />
-                      <label className="lh-1 text-16 text-light-1">
-                        {" "}
-                        {element.policy}
-                      </label>
-                    </div>
-                  </td>
-                  {/* End td */}
-                  <td className="col-auto">
-                    <button
-                      className="flex-center bg-light-2 rounded-4 size-35"
-                      onClick={DeleteItem.bind(this, element.id)}
-                    >
-                      <i className="icon-trash-2 text-16 text-light-1" />
-                    </button>
-                  </td>
-                  {/* End td */}
-                </tr>
-              ))}
-              <tr></tr>
-              {/* End tr */}
+              {policyQuestionList.length > 0 &&
+                policyQuestionList.map((element) => (
+                  <div key={element}>
+                    {element}
+                    <td className="col-auto">
+                      <button
+                        className="flex-center bg-light-2 rounded-4 size-35"
+                        onClick={DeleteItem.bind(this, element)}
+                      >
+                        <i className="icon-trash-2 text-16 text-light-1" />
+                      </button>
+                    </td>
+                  </div>
+                ))}
             </tbody>
           </table>
         </div>

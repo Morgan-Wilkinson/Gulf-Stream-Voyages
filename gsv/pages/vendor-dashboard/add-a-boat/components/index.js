@@ -12,21 +12,11 @@ const Index = () => {
       labelNo: 1,
       content: <ContentTabContent />,
     },
-    // {
-    //   label: "Location",
-    //   labelNo: 2,
-    //   content: <LocationTabContent />,
-    // },
     {
       label: "Pricing",
       labelNo: 2,
       content: <PricingTabContent />,
     },
-    // {
-    //   label: "Attributes",
-    //   labelNo: 4,
-    //   content: <AttributesTabContent />,
-    // },
   ];
 
   return (
