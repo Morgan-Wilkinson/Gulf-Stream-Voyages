@@ -7,8 +7,8 @@ const Sidebar = () => {
     <>
       <div className="sidebar -dashboard" id="vendorSidebarMenu">
         <div className="sidebar__item ">
-          <a
-            href="#"
+          <Link
+            href="/vendor-dashboard/dashboard"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
@@ -19,7 +19,7 @@ const Sidebar = () => {
               className="mr-15"
             />
             Booking Manager
-          </a>
+          </Link>
         </div>
         {/* End accordion__item */}
 
