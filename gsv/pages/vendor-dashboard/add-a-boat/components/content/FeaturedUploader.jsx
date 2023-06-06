@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { BoatContext } from "../ContentTabContent";
 
 const FeaturedUploader = () => {
+  const boat = useContext(BoatContext);
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
 
@@ -30,6 +33,7 @@ const FeaturedUploader = () => {
             newImages.push(reader.result);
             if (newImages.length === fileList.length) {
               setImages([...images, ...newImages]);
+              boat.featuredImages = newImages;
               setError("");
             }
           }

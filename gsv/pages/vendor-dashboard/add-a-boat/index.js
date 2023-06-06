@@ -14,7 +14,7 @@ export default function VendorAddBoat() {
   if (userContext != null && userContext.admin == true) {
     return (
       <>
-        <Seo pageTitle="Vendor Add Hotel" />
+        <Seo pageTitle="Vendor Add Boat" />
         {/* End Page Title */}
 
         <div className="header-margin"></div>

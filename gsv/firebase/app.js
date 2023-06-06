@@ -167,6 +167,7 @@ function Logout() {
   signOut(auth);
   localStorage.clear();
 }
+
 export {
   auth,
   db,

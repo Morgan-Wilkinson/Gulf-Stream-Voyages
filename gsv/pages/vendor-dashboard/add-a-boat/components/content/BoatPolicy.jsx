@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { BoatContext } from "../ContentTabContent";
 
 const BoatPolicy = () => {
+  const boat = useContext(BoatContext);
   const [error, setError] = useState("");
   const [policies, setPolicies] = useState(2);
   const [questionPolicyList, setQuestionPolicyList] = useState(["", ""]);
@@ -17,7 +20,9 @@ const BoatPolicy = () => {
         if (i == index) continue;
         tempArray.push(questionPolicyList[i]);
       }
+
       setQuestionPolicyList(tempArray);
+      boat.policyArray = tempArray;
     } else {
       alert("Minimum of at least 1 policy is required.");
     }
@@ -30,29 +35,19 @@ const BoatPolicy = () => {
     tempArray[index] = newElement;
 
     setQuestionPolicyList(tempArray);
+    boat.policyArray = tempArray;
   };
+
+  function SaveBoat() {}
 
   return (
     <>
-      <div className="row x-gap-20 y-gap-20">
-        <div className="col-12">
-          <div className="form-input ">
-            <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">
-              Boat rating standard
-            </label>
-          </div>
-        </div>
-      </div>
-      {/* End boat rating standard */}
-
       <div className="mt-20">
-        <div className="fw-500 mb-20">Policy</div>
         <div className="overflow-scroll scroll-bar-1">
           <table className="table-5 -border-bottom col-12">
             <thead className="bg-light-2">
               <tr>
-                <th>Policy</th>
+                <th>Policy List</th>
                 <th />
               </tr>
             </thead>

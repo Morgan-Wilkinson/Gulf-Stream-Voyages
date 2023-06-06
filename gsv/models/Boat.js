@@ -1,16 +1,13 @@
 class Boat {
   // Form Fields
-  name;
-  description;
-  youtubeLink;
-  bannerImage;
-  featuredImage;
-  galleryImageArray = new Array();
-  policyMap = new Map();
-
-  constructor(obj) {
-    obj = obj != null ? obj : {};
-  }
+  name = "";
+  type = "";
+  description = "";
+  youtubeLink = "";
+  bannerImages = new Array();
+  featuredImages = new Array();
+  galleryImages = new Array();
+  policyArray = new Array();
 }
 
 export default Boat;
