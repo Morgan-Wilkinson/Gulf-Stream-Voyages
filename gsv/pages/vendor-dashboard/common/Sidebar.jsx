@@ -41,6 +41,23 @@ const Sidebar = () => {
         {/* End accordion__item */}
 
         <div className="sidebar__item ">
+          <Link
+            href="/vendor-dashboard/create-an-internal-user"
+            className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
+          >
+            <Image
+              width={20}
+              height={20}
+              src="/img/dashboard/sidebar/house.svg"
+              alt="image"
+              className="mr-15"
+            />
+            Create an Internal User
+          </Link>
+        </div>
+        {/* End accordion__item */}
+
+        <div className="sidebar__item ">
           <LogoutAndRedirect></LogoutAndRedirect>
         </div>
         {/* End accordion__item */}
