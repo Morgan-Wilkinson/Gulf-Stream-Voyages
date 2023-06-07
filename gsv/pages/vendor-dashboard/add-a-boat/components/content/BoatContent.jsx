@@ -13,11 +13,11 @@ const BoatContent = () => {
   };
 
   const setDescription = (description) => {
-    boat.description = name;
+    boat.description = description;
   };
 
   const setYoutubeLink = (youtubeLink) => {
-    boat.youtubeLink = name;
+    boat.youtubeLink = youtubeLink;
   };
 
   return (

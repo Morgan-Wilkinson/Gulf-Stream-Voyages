@@ -32,34 +32,36 @@ const errorCodeMessage = new Map([
     "auth/too-many-requests",
     "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
   ],
+  [
+    "permission-denied",
+    "This user does not have the correct permissions to preform this action.",
+  ],
 ]);
 
-const SetData = async (data, group, id) => {
-  var result;
+const boat = new Boat();
+
+const SetBoatData = async () => {
+  const { ...data } = boat;
   const boatsRef = collection(db, "boats");
-  try {
-    if (id != null) {
-      const currentDoc = doc(boatsRef, id);
-      await setDoc(currentDoc, data);
-    } else {
-      const currentDoc = doc(boatsRef);
-      await setDoc(currentDoc, data);
-    }
-  } catch (err) {
-    console.error(err);
-    result = { status: false, error: errorCodeMessage.get(err.code) };
-    return result;
-  }
+
+  const currentDoc = doc(boatsRef);
+  await setDoc(currentDoc, data)
+    .then(() => {
+      alert(data.name + " saved!");
+      boat.clearFields();
+    })
+    .catch((err) => {
+      console.log(err);
+
+      alert(
+        errorCodeMessage.get(err.code) != "undefined"
+          ? errorCodeMessage.get(err.code)
+          : err
+      );
+    });
 };
 
 const ContentTabContent = () => {
-  const [boat, setBoat] = useState(new Boat());
-
-  function SaveBoat() {
-    const { ...object } = boat;
-    console.log(object);
-    SetData(object, "boats", null);
-  }
   return (
     <>
       <BoatContext.Provider value={boat}>
@@ -96,7 +98,7 @@ const ContentTabContent = () => {
           <div className="d-inline-block pt-30">
             <button
               className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
-              onClick={SaveBoat}
+              onClick={SetBoatData}
             >
               Save Boat <div className="icon-arrow-top-right ml-15" />
             </button>

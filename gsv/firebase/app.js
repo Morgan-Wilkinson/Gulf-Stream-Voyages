@@ -44,6 +44,10 @@ const errorCodeMessage = new Map([
     "auth/too-many-requests",
     "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
   ],
+  [
+    "permission-denied",
+    "This user does not have the correct permissions to preform this action.",
+  ],
 ]);
 
 const firebaseConfig = {
@@ -85,7 +89,11 @@ const SignInWithGoogle = async () => {
     }
   } catch (err) {
     console.error(err);
-    result = { status: false, error: errorCodeMessage.get(err.code) };
+    const errorMessage =
+      errorCodeMessage.get(err.code) != "undefined"
+        ? errorCodeMessage.get(err.code)
+        : err;
+    result = { status: false, error: errorMessage };
     return result;
   }
 };
@@ -116,7 +124,11 @@ const SignInWithFacebook = async () => {
     }
   } catch (err) {
     console.error(err);
-    result = { status: false, error: errorCodeMessage.get(err.code) };
+    const errorMessage =
+      errorCodeMessage.get(err.code) != "undefined"
+        ? errorCodeMessage.get(err.code)
+        : err;
+    result = { status: false, error: errorMessage };
     return result;
   }
 };
@@ -127,7 +139,11 @@ const LogInWithEmailAndPassword = async (email, password) => {
     await getData("users", res.user.uid);
   } catch (err) {
     console.error(err);
-    result = { status: false, error: errorCodeMessage.get(err.code) };
+    const errorMessage =
+      errorCodeMessage.get(err.code) != "undefined"
+        ? errorCodeMessage.get(err.code)
+        : err;
+    result = { status: false, error: errorMessage };
     return result;
   }
 };
@@ -150,7 +166,11 @@ const RegisterWithEmailAndPassword = async (name, email, password) => {
     });
   } catch (err) {
     console.error(err);
-    result = { status: false, error: errorCodeMessage.get(err.code) };
+    const errorMessage =
+      errorCodeMessage.get(err.code) != "undefined"
+        ? errorCodeMessage.get(err.code)
+        : err;
+    result = { status: false, error: errorMessage };
     return result;
   }
 };
@@ -160,7 +180,11 @@ const SendPasswordReset = async (email) => {
     alert("Password reset link sent!");
   } catch (err) {
     console.error(err);
-    alert(errorCodeMessage.get(err.code));
+    alert(
+      errorCodeMessage.get(err.code) != "undefined"
+        ? errorCodeMessage.get(err.code)
+        : err
+    );
   }
 };
 function Logout() {
