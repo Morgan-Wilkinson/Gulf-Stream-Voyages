@@ -3,17 +3,22 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, RegisterWithEmailAndPassword } from "../../../../firebase/app";
+import { auth, CreateUserAndSendPasswordReset } from "../../../../firebase/app";
+import Select from "react-select";
 
 function InternalUserForm() {
   const router = useRouter();
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmationPassword, setConfirmationPassword] = React.useState("");
+  const [role, setRole] = React.useState("");
   const [shownError, setError] = React.useState("");
+  const [shownSuccess, setSuccess] = React.useState("");
   const [user, loading, error] = useAuthState(auth);
+  const userRoles = [
+    { value: "admin", label: "Admin" },
+    { value: "internal", label: "Internal" },
+  ];
   const errorCodeMessage = new Map([
     [
       "auth/account-exists-with-different-credential",
@@ -41,63 +46,37 @@ function InternalUserForm() {
     if (error) setError("");
     if (shownError) setError("");
 
-    // Check passwords match
-    if (password !== confirmationPassword) {
-      setError("Passwords do not match");
+    if (role == "") {
+      setError("Please select a role!");
       return;
     }
 
-    // Check password format
-    const passwordRegex =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,256}$/gm;
-
-    if (!passwordRegex.test(password)) {
-      setError(
-        "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
-      );
-      return;
-    }
-
-    RegisterWithEmailAndPassword(
-      firstName + " " + lastName,
-      email,
-      password
-    ).then((result) => {
-      if (auth.currentUser) {
-        router.push("/");
-      } else {
-        setError(result.error);
-      }
-    });
+    CreateUserAndSendPasswordReset(firstName + " " + lastName, email, role)
+      .then((result) => {
+        console.log(result);
+        setSuccess(
+          "User " +
+            firstName +
+            " " +
+            lastName +
+            " succesfully created! Please check your mailbox " +
+            email +
+            " for your password reset link. You'll need reset you're password first to log in!"
+        );
+      })
+      .catch((err) => {
+        setError(err);
+      });
   };
 
   return (
     <form onSubmit={handleForm} className="form row y-gap-20">
       <div className="d-flex align-items-center">
-        <div class="col-3 d-inline-block">
+        <div className="col-3 d-inline-block">
           <h1 className="text-22 fw-500">User Account Type</h1>
         </div>
-        <div class="col-1 d-inline-block">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Select a User Account Type
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" href="#">
-                Admin
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                Internal
-              </a>
-            </li>
-          </ul>
+        <div className="col-3 d-inline-block">
+          <Select placeholder="Roles" onChange={setRole} options={userRoles} />
         </div>
       </div>
       {/* End .col */}
@@ -144,36 +123,11 @@ function InternalUserForm() {
       </div>
       {/* End .col */}
 
-      <div className="col-12">
-        <div className="form-input ">
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            type="password"
-            name="password"
-            id="password"
-          />
-          <label className="lh-1 text-14 text-light-1">Password</label>
-        </div>
-      </div>
-      {/* End .col */}
-
-      <div className="col-12">
-        <div className="form-input ">
-          <input
-            onChange={(e) => setConfirmationPassword(e.target.value)}
-            required
-            type="password"
-            name="confirmationPassword"
-            id="confirmationPassword"
-          />
-          <label className="lh-1 text-14 text-light-1">Confirm Password</label>
-        </div>
-      </div>
-      {/* End .col */}
-
       <div>
         <p style={{ color: "red" }}>{shownError}</p>
+      </div>
+      <div>
+        <p style={{ color: "green" }}>{shownSuccess}</p>
       </div>
       {/*Error Message*/}
       <div className="col-12">
@@ -181,7 +135,8 @@ function InternalUserForm() {
           type="submit"
           className="button py-20 -dark-1 bg-blue-1 text-white w-100"
         >
-          Sign Up <div className="icon-arrow-top-right ml-15" />
+          Create User and Send Reset Password
+          <div className="icon-arrow-top-right ml-15" />
         </button>
       </div>
       {/* End .col */}

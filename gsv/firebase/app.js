@@ -174,6 +174,16 @@ const RegisterWithEmailAndPassword = async (name, email, password) => {
     return result;
   }
 };
+
+const CreateUserAndSendPasswordReset = async (name, email, role) => {
+  var result;
+  try {
+    // Call https cloud function that creates user
+  } catch (err) {
+    return result;
+  }
+};
+
 const SendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
@@ -199,6 +209,7 @@ export {
   SignInWithFacebook,
   LogInWithEmailAndPassword,
   RegisterWithEmailAndPassword,
+  CreateUserAndSendPasswordReset,
   SendPasswordReset,
   Logout,
 };
