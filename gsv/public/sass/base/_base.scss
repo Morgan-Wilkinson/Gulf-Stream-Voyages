@@ -1,3 +1,6 @@
+@import "../abstracts/tools";
+@import "../abstracts/variables";
+
 :root {
   --swiper-theme-color: var(--color-blue-1);
   --swiper-navigation-size: 30px;
@@ -83,3 +86,19 @@ p {
   font-size: $font-size;
   color: var(--color-light-1);
 }
+
+
+/*
+// This function was orginally suppose to be used to create a dynamic switch to the 
+// body tags  colors
+body {
+  .
+  .
+  .
+  @include darkMode($themes) {
+  background-color: themed('bg')
+  color:themed('text')
+  }
+  .
+  .
+*/

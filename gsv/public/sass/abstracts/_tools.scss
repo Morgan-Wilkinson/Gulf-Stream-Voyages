@@ -1,3 +1,25 @@
+@import "./variables";
+
+@mixin darkMode {
+  @if($darkMode) {
+    @media(prefers-color-scheme: dark) {
+      @content;
+    }
+  }
+}
+
+@mixin darkToggle($themes) {
+  @each $name, $values in $themes {
+    .#{$name}-theme {
+      $theme-map: $values !global;
+      @content;
+    }
+  }
+}
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
 @mixin media-above($breakpoint) {
   $breakpoint-value: map-get($breakpoints, $breakpoint);
 
@@ -28,6 +50,8 @@
   $value: rgba($value, $opacity);
   @return $value;
 }
+
+
 
 .ratio {
   position: relative;

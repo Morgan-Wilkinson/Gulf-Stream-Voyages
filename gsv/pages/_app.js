@@ -8,6 +8,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-cards";
 import "aos/dist/aos.css";
 import "../styles/index.scss";
+import { useTheme, ThemeProvider } from "next-themes";
 import User from "../models/User";
 
 if (typeof window !== "undefined") {
@@ -17,6 +18,7 @@ if (typeof window !== "undefined") {
 export const UserContext = createContext();
 
 export default function App({ Component, pageProps }) {
+  const { systemTheme, theme, setTheme } = useTheme();
   useEffect(() => {
     Aos.init({
       duration: 1200,
@@ -25,11 +27,13 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <main>
-      <UserContext.Provider value={User}>
-        <Component {...pageProps} />
-        <ScrollTop />
-      </UserContext.Provider>
+    <main className={theme}>
+      <ThemeProvider attribute={theme}>
+        <UserContext.Provider value={User}>
+          <Component {...pageProps} />
+          <ScrollTop />
+        </UserContext.Provider>
+      </ThemeProvider>
     </main>
   );
 }

@@ -1,3 +1,4 @@
+
 :root {
   --font-primary: "Jost", sans-serif;
 }
@@ -27,6 +28,8 @@ $text-sizes: 4, 7, 10, 12, 13, 14, 15, 16, 18, 20, 22, 24, 25, 26, 30, 40, 50, 6
     --text-#{$size}: #{$size}px;
   }
 }
+
+$darkMode: 'true';
 
 $colors: (
   white: #ffffff,
@@ -71,8 +74,23 @@ $colors: (
   success-2: #5b7052,
 );
 
+$themes: (
+  light: (
+    text: #333333,
+    bg: #ffffff,
+    brand: #567567,
+  ),
+  dark: (
+    text: #ffffff,
+    bg: #1a1919,
+    brand: #abcabc,
+  ),
+);
+
 :root {
   @each $name, $color in $colors {
     --color-#{$name}: #{$color};
   }
 }
+
+

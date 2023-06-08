@@ -1,11 +1,16 @@
 import Wrapper from "./layout/wrapper";
 import Home from "./home/home";
+import { useTheme } from "next-themes";
 
 const MainRoot = () => {
+  const { systemTheme, theme, setTheme } = useTheme();
+
   return (
-    <Wrapper>
-      <Home />
-    </Wrapper>
+    <div className={theme}>
+      <Wrapper>
+        <Home />
+      </Wrapper>
+    </div>
   );
 };
 
