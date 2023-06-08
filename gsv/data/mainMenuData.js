@@ -42,6 +42,26 @@ export const pageItems = [
     routePath: "/ui-elements",
   },
 ];
+
+export const vendorItems = [
+  {
+    name: "Vendor Dashboard",
+    routePath: "/vendor-dashboard/dashboard",
+  },
+  {
+    name: "Add Boat",
+    routePath: "/vendor-dashboard/add-a-boat",
+  },
+  {
+    name: "Create a New User",
+    routePath: "/vendor-dashboard/create-an-internal-user",
+  },
+  {
+    name: "Settings",
+    routePath: "/vendor-dashboard/db-settings",
+  },
+];
+
 export const dashboardItems = [
   {
     name: "Dashboard",

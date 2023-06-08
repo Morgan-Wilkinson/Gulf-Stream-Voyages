@@ -14,7 +14,6 @@ const index = () => {
       <Seo pageTitle="Cruise List v1" />
       {/* End Page Title */}
       <div className="header-margin"></div>
-      header top margin
       <Header />
       {/* End Header 1 */}
       <section className="pt-40 pb-40 bg-light-2">

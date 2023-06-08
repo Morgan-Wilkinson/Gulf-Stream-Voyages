@@ -1,14 +1,12 @@
 import Link from "next/link";
 
-import { pageItems, dashboardItems } from "../../data/mainMenuData";
+import { pageItems, vendorItems } from "../../data/mainMenuData";
 import { AdminPage } from "../../utils/utils";
 import {
   isActiveLink,
   isActiveParentChild,
 } from "../../utils/linkActiveChecker";
 import { useRouter } from "next/router";
-import { auth } from "../../firebase/app";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 function AdminDashboard() {
   const router = useRouter();
@@ -17,15 +15,15 @@ function AdminDashboard() {
     return (
       <li
         className={`${
-          isActiveParentChild(dashboardItems, router.asPath) ? "current" : ""
+          isActiveParentChild(vendorItems, router.asPath) ? "current" : ""
         } menu-item-has-children`}
       >
         <a href="#">
-          <span className="mr-10">Dashboard</span>
+          <span className="mr-10">Vendor Dashboard</span>
           <i className="icon icon-chevron-sm-down" />
         </a>
         <ul className="subnav ">
-          {dashboardItems.map((menu, i) => (
+          {vendorItems.map((menu, i) => (
             <li
               key={i}
               className={
@@ -59,14 +57,26 @@ const MainMenu = ({ style = "" }) => {
         </li>
         {/* End Cruises single menu */}
 
+        <li className={router.pathname === "/boat-listing" ? "current" : ""}>
+          <Link href="/boat-listing">Boat Listing</Link>
+        </li>
         <li className={router.pathname === "/contact" ? "current" : ""}>
           <Link href="/contact">Contact</Link>
+        </li>
+
+        <li className={router.pathname === "/about" ? "current" : ""}>
+          <Link href="/about">About</Link>
+        </li>
+
+        <li className={router.pathname === "/about" ? "current" : ""}>
+          <Link href="/about">FAQ</Link>
         </li>
 
         <li className={router.pathname === "/testimonies" ? "current" : ""}>
           <Link href="/testimonies">Testimonies</Link>
         </li>
 
+        <AdminDashboard></AdminDashboard>
         <li
           className={`${
             isActiveParentChild(pageItems, router.asPath) ? "current" : ""
@@ -90,7 +100,6 @@ const MainMenu = ({ style = "" }) => {
           </ul>
         </li>
         {/* End pages items */}
-        <AdminDashboard></AdminDashboard>
       </ul>
     </nav>
   );
