@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
@@ -7,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useContext } from "react";
 import { UserContext } from "../../../pages/_app";
 import LogoutAndRedirect from "../../../components/common/LogoutAndRedirect";
+import { useTheme } from "next-themes";
 
 const LoginButtons = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -41,6 +43,26 @@ const LoginButtons = () => {
       </div>
     );
   }
+};
+
+const DarkLightMode = () => {
+  const { systemTheme, theme, setTheme } = useTheme();
+
+  return (
+    <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white">
+      <button
+        onClick={() =>
+          theme == "theme-dark"
+            ? setTheme("theme-light")
+            : setTheme("theme-dark")
+        }
+      >
+        <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none ">
+          <div>{theme == "theme-dark" ? "Light Mode" : "Dark Mode"}</div>
+        </div>
+      </button>
+    </div>
+  );
 };
 
 const Header = () => {
@@ -104,6 +126,11 @@ const Header = () => {
                 {/* Start btn-group */}
                 <LoginButtons></LoginButtons>
                 {/* End btn-group */}
+
+                {/* Start toggle dark and light mode */}
+                <DarkLightMode></DarkLightMode>
+                {/* End toggle dark and light mode */}
+
                 {/* Start mobile menu icon */}
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   <div>
