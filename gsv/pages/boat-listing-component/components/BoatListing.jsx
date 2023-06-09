@@ -3,7 +3,6 @@ import { db } from "../../../firebase/app";
 import { collection, getDocs } from "firebase/firestore";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import cruiseData from "../../../data/cruise";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
 import { BoatsContext } from "../index";
@@ -21,15 +20,14 @@ const BoatListing = () => {
       });
 
       tempArray.sort((a, b) => {
-        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
         if (nameA < nameB) {
           return -1;
         }
         if (nameA > nameB) {
           return 1;
         }
-        // names must be equal
         return 0;
       });
 
