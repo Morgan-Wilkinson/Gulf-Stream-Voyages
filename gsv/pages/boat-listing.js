@@ -6,12 +6,12 @@ import Footer from "../components/footer";
 import WhyChoose from "../components/block/BlockGuide";
 import Address from "../components/block/Address";
 import Social from "../components/common/social/Social";
-import BoatListing from "./boat-listing/index";
+import BoatListing from "./boat-listing-component/index";
 
 const BoatListingPage = () => {
   return (
     <>
-      <Seo pageTitle="Contact" />
+      <Seo pageTitle="Boat Listing" />
       {/* End Page Title */}
 
       <div className="header-margin"></div>
