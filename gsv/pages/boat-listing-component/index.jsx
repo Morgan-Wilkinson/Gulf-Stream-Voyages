@@ -1,11 +1,10 @@
+"use client";
 import Seo from "../../components/common/Seo";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer";
-import MainFilterSearchBox from "../../components/cruise-list/cruise-list-v1/MainFilterSearchBox";
-import TopHeaderFilter from "../../components/cruise-list/cruise-list-v1/TopHeaderFilter";
+import TopHeaderFilter from "./components/TopHeaderFilter";
 import BoatListing from "./components/BoatListing";
-import Pagination from "../../components/cruise-list/common/Pagination";
-import Sidebar from "../../components/cruise-list/cruise-list-v1/Sidebar";
+import Pagination from "../../components/common/Pagination";
 import { createContext, useState } from "react";
 
 export const BoatsContext = createContext();
@@ -27,10 +26,7 @@ const BoatListingContainer = () => {
                 <div className="text-center">
                   <h1 className="text-30 fw-600">Boat Listing</h1>
                 </div>
-                {/* End text-center */}
-                {/* <MainFilterSearchBox /> */}
               </div>
-              {/* End col-12 */}
             </div>
           </div>
         </section>
@@ -38,37 +34,6 @@ const BoatListingContainer = () => {
         <section className="layout-pt-md layout-pb-lg">
           <div className="container">
             <div className="row y-gap-30">
-              {/*
-            <div className="col-xl-3">
-              <aside className="sidebar y-gap-40 xl:d-none">
-                <Sidebar />
-              </aside>
-
-              <div
-                className="offcanvas offcanvas-start"
-                tabIndex="-1"
-                id="listingSidebar"
-              >
-                <div className="offcanvas-header">
-                  <h5 className="offcanvas-title" id="offcanvasLabel">
-                    Filter Tours
-                  </h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="offcanvas"
-                    aria-label="Close"
-                  ></button>
-                </div>
-
-                <div className="offcanvas-body">
-                  <aside className="sidebar y-gap-40  xl:d-block">
-                    <Sidebar />
-                  </aside>
-                </div>
-              </div>
-            </div>
-          */}
               <div>
                 <TopHeaderFilter />
                 <div className="mt-30"></div>

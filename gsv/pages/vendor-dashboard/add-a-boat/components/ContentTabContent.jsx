@@ -1,3 +1,4 @@
+"use client";
 import { db } from "../../../../firebase/app";
 import { getDocs, collection, doc, setDoc } from "firebase/firestore";
 import { useEffect, useState, useContext, createContext } from "react";
@@ -9,7 +10,7 @@ import FeaturedUploader from "./content/FeaturedUploader";
 import GalleryUploader from "./content/GalleryUploader";
 
 export const BoatContext = createContext();
-
+const boat = new Boat();
 const errorCodeMessage = new Map([
   [
     "auth/account-exists-with-different-credential",
@@ -37,8 +38,7 @@ const errorCodeMessage = new Map([
     "This user does not have the correct permissions to preform this action.",
   ],
 ]);
-
-const boat = new Boat();
+var success = "rz";
 
 const SetBoatData = async () => {
   const { ...data } = boat;
@@ -48,6 +48,7 @@ const SetBoatData = async () => {
   await setDoc(currentDoc, data)
     .then(() => {
       alert(data.name + " saved!");
+      success = data.name + " saved!";
       boat.clearFields();
     })
     .catch((err) => {
@@ -62,6 +63,7 @@ const SetBoatData = async () => {
 };
 
 const ContentTabContent = () => {
+  success = "";
   return (
     <>
       <BoatContext.Provider value={boat}>
@@ -94,6 +96,11 @@ const ContentTabContent = () => {
           {/* End BoatPolicy */}
 
           {/* End FeaturedUploader */}
+          {success != "" && (
+            <div class="alert alert-success" role="alert">
+              {success}
+            </div>
+          )}
 
           <div className="d-inline-block pt-30">
             <button

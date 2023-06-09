@@ -11,21 +11,30 @@ import { BoatsContext } from "../index";
 const BoatListing = () => {
   const delayAnimation = 100;
   const { boats, setBoats } = useContext(BoatsContext);
-  var boatArray = new Array();
 
   useEffect(() => {
     const GetAllBoatData = async () => {
       let tempArray = new Array();
       const querySnapshot = await getDocs(collection(db, "boats"));
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
         tempArray.push(doc.data());
-        boatArray.push(doc.data());
+      });
+
+      tempArray.sort((a, b) => {
+        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
       });
 
       setBoats(tempArray);
-      console.log(boats);
+      localStorage.setItem("boats", JSON.stringify(tempArray));
     };
 
     GetAllBoatData();
@@ -87,7 +96,12 @@ const BoatListing = () => {
               {/* End .col-auto */}
 
               <div className="col-md">
-                <div className="text-14 text-light-1">{element?.name}</div>
+                <div className="text-14 text-light-1">
+                  <i className="icon-star text-yellow-1 text-10" />{" "}
+                  <span className="text-15 fw-500 text-dark-1">
+                    {element?.ratings}
+                  </span>
+                </div>
                 <h3 className="text-18 lh-16 fw-500 mt-5">{element?.name}</h3>
                 <div className="row y-gap-15 pt-30">
                   <div className="col-auto">
@@ -99,21 +113,13 @@ const BoatListing = () => {
               {/* End col-md */}
 
               <div className="col-md-auto text-right md:text-left">
-                <div className="row x-gap-10 y-gap-10 justify-end items-center md:justify-start">
-                  <div className="col-auto">
-                    <i className="icon-star text-yellow-1 text-10" />
-                  </div>
-                  <div className="col-auto">
-                    <div className="text-14 lh-13 text-light-1">
-                      <span className="text-15 fw-500 text-dark-1">
-                        {element?.ratings}
-                      </span>{" "}
-                      {element?.numberOfReviews} reviews
-                    </div>
+                <div className="col-auto">
+                  <div className="text-14 lh-13 text-light-1">
+                    {element?.numberOfReviews} reviews
                   </div>
                 </div>
                 <Link
-                  href={`/cruise/cruise-single/${element.name}`}
+                  href={`/boat-listing-component/components/${element.name}`}
                   className="button h-50 px-24 -dark-1 bg-blue-1 text-white mt-24"
                 >
                   View Detail <div className="icon-arrow-top-right ml-15" />

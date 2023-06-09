@@ -1,3 +1,5 @@
+"use client";
+import dynamic from "next/dynamic";
 import React, { useState, useEffect } from "react";
 import Seo from "../../../components/common/Seo";
 import DashboardCard from "./components/DashboardCard";
@@ -12,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { UserContext } from "../../_app";
 
-export default function VendorDashboard() {
+const VendorDashboard = () => {
   const router = useRouter();
   const userContext = useContext(UserContext);
   console.log(userContext);
@@ -102,4 +104,6 @@ export default function VendorDashboard() {
   } else if (typeof window !== "undefined") {
     return router.push("/404");
   }
-}
+};
+
+export default dynamic(() => Promise.resolve(VendorDashboard), { ssr: false });

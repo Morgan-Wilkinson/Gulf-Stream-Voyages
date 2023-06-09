@@ -1,5 +1,3 @@
-import { getAuth } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
 import dynamic from "next/dynamic";
 import Seo from "../../components/common/Seo";
 import Footer from "../../components/footer";
@@ -13,8 +11,6 @@ import Cruise from "../../components/cruise/Cruise1";
 import SearchBoxContent from "../../components/hero/hero/SearchBoxContent";
 
 const Home = () => {
-  const auth = getAuth();
-  const [user, loading, error] = useAuthState(auth);
   return (
     <>
       <Seo pageTitle="Home" />

@@ -8,6 +8,8 @@ class Boat {
   featuredImages = new Array();
   galleryImages = new Array();
   policyArray = new Array();
+  numberOfReviews = 0;
+  ratings = 0;
 
   clearFields() {
     this.name = "";
@@ -18,6 +20,8 @@ class Boat {
     this.featuredImages = new Array();
     this.galleryImages = new Array();
     this.policyArray = new Array();
+    this.numberOfReviews = 0;
+    this.ratings = 0;
   }
 }
 

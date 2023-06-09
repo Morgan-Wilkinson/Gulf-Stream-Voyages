@@ -1,3 +1,6 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import Seo from "../../../components/common/Seo";
 import Sidebar from "../common/Sidebar";
 import Header from "../../../components/header/dashboard-header";
@@ -7,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../../pages/_app";
 
-export default function VendorAddBoat() {
+const VendorAddBoat = () => {
   const router = useRouter();
   const userContext = useContext(UserContext);
 
@@ -59,4 +62,6 @@ export default function VendorAddBoat() {
   } else if (typeof window !== "undefined") {
     return router.push("/404");
   }
-}
+};
+
+export default dynamic(() => Promise.resolve(VendorAddBoat), { ssr: false });

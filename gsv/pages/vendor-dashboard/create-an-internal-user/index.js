@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Seo from "../../../components/common/Seo";
 import Sidebar from "../common/Sidebar";
@@ -7,8 +8,9 @@ import InternalUserForm from "./components/InternalUserForm";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { UserContext } from "../../_app";
+import dynamic from "next/dynamic";
 
-export default function InternalUserCreationForm() {
+const InternalUserCreationForm = () => {
   const router = useRouter();
   const userContext = useContext(UserContext);
 
@@ -62,4 +64,8 @@ export default function InternalUserCreationForm() {
   } else if (typeof window !== "undefined") {
     return router.push("/404");
   }
-}
+};
+
+export default dynamic(() => Promise.resolve(InternalUserCreationForm), {
+  ssr: false,
+});

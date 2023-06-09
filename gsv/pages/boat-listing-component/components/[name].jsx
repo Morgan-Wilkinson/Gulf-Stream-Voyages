@@ -23,6 +23,7 @@ const BoatSingleDynamic = () => {
   const [cruise, setCruise] = useState({});
   const id = router.query.id;
 
+  // Get the Data for the boat and if null retrieve the data
   useEffect(() => {
     if (!id) <h1>Loading...</h1>;
     else setCruise(cruiseData.find((item) => item.id == id));

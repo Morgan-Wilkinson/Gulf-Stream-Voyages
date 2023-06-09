@@ -1,17 +1,20 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
 import { pageItems, vendorItems } from "../../data/mainMenuData";
-import { AdminPage } from "../../utils/utils";
 import {
   isActiveLink,
   isActiveParentChild,
 } from "../../utils/linkActiveChecker";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../../pages/_app";
 
 function AdminDashboard() {
   const router = useRouter();
-  const admin = AdminPage();
-  if (admin == true)
+
+  const userContext = useContext(UserContext);
+  if (userContext != null && userContext.admin == true) {
     return (
       <li
         className={`${
@@ -36,6 +39,7 @@ function AdminDashboard() {
         </ul>
       </li>
     );
+  }
 }
 const MainMenu = ({ style = "" }) => {
   const router = useRouter();
