@@ -17,7 +17,6 @@ import { UserContext } from "../../_app";
 const VendorDashboard = () => {
   const router = useRouter();
   const userContext = useContext(UserContext);
-  console.log(userContext);
   if (userContext != null && userContext.admin == true) {
     return (
       <>

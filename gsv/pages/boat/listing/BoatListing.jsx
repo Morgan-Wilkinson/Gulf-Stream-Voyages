@@ -122,7 +122,7 @@ const BoatListing = () => {
                       </div>
                     </div>
                     <Link
-                      href={`/boat-listing-component/components/${element.name}`}
+                      href={`/boat/detailView/${element.name}`}
                       className="button h-50 px-24 -dark-1 bg-blue-1 text-white mt-24"
                     >
                       View Detail <div className="icon-arrow-top-right ml-15" />

@@ -2,9 +2,8 @@
 import Seo from "../../components/common/Seo";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer";
-import TopHeaderFilter from "./components/TopHeaderFilter";
-import BoatListing from "./components/BoatListing";
-import Pagination from "../../components/common/Pagination";
+import TopHeaderFilter from "./listing/components/TopHeaderFilter";
+import BoatListing from "./listing/BoatListing";
 import { createContext, useState } from "react";
 
 export const BoatsContext = createContext();

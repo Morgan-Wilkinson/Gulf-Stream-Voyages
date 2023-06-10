@@ -38,10 +38,11 @@ const errorCodeMessage = new Map([
     "This user does not have the correct permissions to preform this action.",
   ],
 ]);
-var success = "rz";
+var success = "";
 
 const SetBoatData = async () => {
   const { ...data } = boat;
+  console.log(data);
   const boatsRef = collection(db, "boats");
 
   const currentDoc = doc(boatsRef);
@@ -53,12 +54,8 @@ const SetBoatData = async () => {
     })
     .catch((err) => {
       console.log(err);
-
-      alert(
-        errorCodeMessage.get(err.code) != "undefined"
-          ? errorCodeMessage.get(err.code)
-          : err
-      );
+      const error = errorCodeMessage.get(err.code);
+      alert(error != "undefined" && error != null ? error : err.message);
     });
 };
 
