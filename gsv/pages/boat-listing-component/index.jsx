@@ -42,7 +42,7 @@ const BoatListingContainer = () => {
                   <BoatListing />
                 </div>
                 {/* End .row */}
-                <Pagination />
+                {/* <Pagination /> */}
               </div>
               {/* End .col for right content */}
             </div>
