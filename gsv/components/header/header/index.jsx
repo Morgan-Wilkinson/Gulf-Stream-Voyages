@@ -2,19 +2,17 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
-import { auth } from "../../../firebase/app";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useContext } from "react";
 import { UserContext } from "../../../pages/_app";
 import LogoutAndRedirect from "../../../components/common/LogoutAndRedirect";
 
 const LoginButtons = () => {
-  const [user, loading, error] = useAuthState(auth);
-  if (user && user.displayName) {
+  const userContext = useContext(UserContext);
+  if (userContext != null && userContext.admin == true) {
     return (
       <div>
         <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
-          <p className="px-10">Welcome {user.displayName}</p>
+          <p className="px-10">Welcome {userContext.name}</p>
           <LogoutAndRedirect></LogoutAndRedirect>
         </div>
       </div>
@@ -45,7 +43,6 @@ const LoginButtons = () => {
 
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
-  const [user, loading, error] = useAuthState(auth);
   const userContext = useContext(UserContext);
 
   const changeBackground = () => {
@@ -74,7 +71,7 @@ const Header = () => {
         if (typeof window !== "undefined") window.location.reload();
       }
     }
-  }, [user, userContext]);
+  }, [userContext]);
 
   return (
     <>

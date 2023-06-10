@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { pageItems, vendorItems } from "../../data/mainMenuData";
 import {
@@ -109,4 +110,4 @@ const MainMenu = ({ style = "" }) => {
   );
 };
 
-export default MainMenu;
+export default dynamic(() => Promise.resolve(MainMenu), { ssr: false });
