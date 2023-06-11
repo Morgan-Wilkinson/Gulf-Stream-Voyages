@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 import WhyChoose from "../components/block/BlockGuide";
 import Address from "../components/block/Address";
 import Social from "../components/common/social/Social";
-import BoatListing from "./boat/index";
+import BoatListingContainer from "./boat/index";
 
 const BoatListingPage = () => {
   return (
@@ -30,7 +30,7 @@ const BoatListingPage = () => {
       </div> 
       */}
 
-      <BoatListing></BoatListing>
+      <BoatListingContainer></BoatListingContainer>
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
           <div className="row x-gap-80 y-gap-20 justify-between">

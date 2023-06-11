@@ -190,11 +190,11 @@ const SendPasswordReset = async (email) => {
     alert("Password reset link sent!");
   } catch (err) {
     console.error(err);
-    alert(
+    const errorMessage =
       errorCodeMessage.get(err.code) != "undefined"
         ? errorCodeMessage.get(err.code)
-        : err
-    );
+        : err;
+    alert(errorMessage);
   }
 };
 function Logout() {

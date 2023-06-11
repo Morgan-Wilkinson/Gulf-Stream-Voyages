@@ -1,17 +1,25 @@
 "use client";
 
-import { useState, useContext, useEffect } from "react";
-import { BoatsContext } from "../index";
+import { useState, useContext } from "react";
+import { BoatListContext } from "../../_app";
 
 const TopHeaderFilter = () => {
-  const { boats, setBoats } = useContext(BoatsContext);
+  const boatListingContext = useContext(BoatListContext);
   const [toggleSort, setToggleSort] = useState("Unordered");
+
+  if (
+    boatListingContext == null ||
+    boatListingContext.boatList == null ||
+    boatListingContext.boatList.length == 0
+  ) {
+    return;
+  }
 
   const HandleSort = () => {
     if (toggleSort != "Descending") {
-      const sortedBoats = boats.toSorted((a, b) => {
-        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      const sortedBoats = boatListingContext.boatList.toSorted((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
         if (nameA < nameB) {
           return -1;
         }
@@ -23,12 +31,12 @@ const TopHeaderFilter = () => {
       });
 
       setToggleSort("Descending");
-      setBoats(sortedBoats);
+      boatListingContext.updateBoatList(sortedBoats);
       localStorage.setItem("boats", JSON.stringify(sortedBoats));
     } else if (toggleSort != "Ascending") {
-      const sortedBoats = boats.toSorted((a, b) => {
-        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      const sortedBoats = boatListingContext.boatList.toSorted((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
         if (nameA > nameB) {
           return -1;
         }
@@ -40,14 +48,9 @@ const TopHeaderFilter = () => {
       });
 
       setToggleSort("Ascending");
-      setBoats(sortedBoats);
+      boatListingContext.updateBoatList(sortedBoats);
       localStorage.setItem("boats", JSON.stringify(sortedBoats));
     }
-  };
-
-  const SortBoats = () => {
-    console.log("Sorting");
-    console.log(boats);
   };
 
   return (
@@ -55,7 +58,9 @@ const TopHeaderFilter = () => {
       <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
           <div className="text-18">
-            <span className="fw-500">{boats.length} properties</span>
+            <span className="fw-500">
+              {boatListingContext.boatList.length} properties
+            </span>
           </div>
         </div>
         {/* End .col */}

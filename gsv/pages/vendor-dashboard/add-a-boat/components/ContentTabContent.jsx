@@ -1,7 +1,7 @@
 "use client";
 import { db } from "../../../../firebase/app";
-import { getDocs, collection, doc, setDoc } from "firebase/firestore";
-import { useEffect, useState, useContext, createContext } from "react";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { createContext } from "react";
 import Boat from "../../../../models/Boat";
 import BoatContent from "./content/BoatContent";
 import BoatPolicy from "./content/BoatPolicy";

@@ -15,11 +15,52 @@ import Facilities from "./components/Facilities";
 import Footer from "../../../components/footer";
 import MapPropertyFinder from "./components/MapPropertyFinder";
 import GalleryCruiseSlider from "./components/GalleryCruiseSlider";
+import { UserContext } from "../../_app";
+import Review from "../../../models/Review";
 
 export const SingleBoatContext = createContext();
+export const NewReviewContext = createContext();
+
+const LeaveReview = () => {
+  const userContext = useContext(UserContext);
+  const review = new Review();
+
+  if (userContext != null && userContext.email != null) {
+    review.email = userContext.email;
+
+    return (
+      <NewReviewContext.Provider value={review}>
+        <section className="pt-40 layout-pb-md">
+          <div className="container">
+            <div className="row">
+              <div className="col-xl-8 col-lg-10">
+                <div className="row">
+                  <div className="col-auto">
+                    <h3 className="text-22 fw-500">Leave a Reply</h3>
+                    <p className="text-15 text-dark-1 mt-5">
+                      Your email address will not be published.
+                    </p>
+                  </div>
+                </div>
+                {/* End .row */}
+
+                <ReplyFormReview />
+                {/* End ReplyFormReview */}
+
+                <ReplyForm />
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* End Reply Comment box section */}
+      </NewReviewContext.Provider>
+    );
+  }
+};
 
 const BoatSingleDynamic = () => {
   const router = useRouter();
+
   const [boat, setBoat] = useState({});
   const name = router.query.name;
 
@@ -35,11 +76,9 @@ const BoatSingleDynamic = () => {
         router.push("/404");
       } else {
         setBoat(foundBoat);
-        console.log(foundBoat);
       }
     }
   }, [name]);
-
   if (name == null && boat == null) router.push("/404");
   else
     return (
@@ -91,14 +130,13 @@ const BoatSingleDynamic = () => {
                   <GalleryCruiseSlider galleryImages={boat?.galleryImages} />
                   {/* End gallery grid wrapper */}
 
-                  <Overview />
+                  <Overview boat={boat} />
                   {/* End Overview */}
                 </div>
                 {/* End .col-xl-8 */}
 
                 <div className="col-xl-4">
-                  {/* 
-                  <SidebarRight cruise={boat} /> */}
+                  <SidebarRight cruise={boat} />
                 </div>
                 {/* End .col-xl-4 */}
               </div>
@@ -133,7 +171,7 @@ const BoatSingleDynamic = () => {
             </div>
           </section>
           {/* End MapPropertyFinder */}
-          <section className="pt-40">
+          <section className="pt-40 py-20">
             <div className="container">
               <div className="row">
                 <div className="col-12">
@@ -167,29 +205,8 @@ const BoatSingleDynamic = () => {
             {/* End container */}
           </section>
           {/* End Review section */}
-          <section className="pt-40 layout-pb-md">
-            <div className="container">
-              <div className="row">
-                <div className="col-xl-8 col-lg-10">
-                  <div className="row">
-                    <div className="col-auto">
-                      <h3 className="text-22 fw-500">Leave a Reply</h3>
-                      <p className="text-15 text-dark-1 mt-5">
-                        Your email address will not be published.
-                      </p>
-                    </div>
-                  </div>
-                  {/* End .row */}
 
-                  <ReplyFormReview />
-                  {/* End ReplyFormReview */}
-
-                  <ReplyForm />
-                </div>
-              </div>
-            </div>
-          </section>
-          {/* End Reply Comment box section */}
+          <LeaveReview></LeaveReview>
           {/* End facilites section */}
           <Footer />
         </SingleBoatContext.Provider>

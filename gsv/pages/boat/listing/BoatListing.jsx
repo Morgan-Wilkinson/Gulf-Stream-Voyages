@@ -1,42 +1,25 @@
 import Image from "next/image";
-import { db } from "../../../firebase/app";
-import { collection, getDocs } from "firebase/firestore";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, useContext, useEffect } from "react";
-import { BoatsContext } from "../index";
+import { BoatListContext } from "../../_app";
 import ReactPaginate from "react-paginate";
 
 const BoatListing = () => {
+  const router = useRouter();
   const delayAnimation = 100;
-  const { boats, setBoats } = useContext(BoatsContext);
-  useEffect(() => {
-    const GetAllBoatData = async () => {
-      let tempArray = new Array();
-      const querySnapshot = await getDocs(collection(db, "boats"));
-      querySnapshot.forEach((doc) => {
-        tempArray.push(doc.data());
-      });
+  const boatListingContext = useContext(BoatListContext);
 
-      tempArray.sort((a, b) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
-
-      setBoats(tempArray);
-      localStorage.setItem("boats", JSON.stringify(tempArray));
-    };
-
-    GetAllBoatData();
-  }, []);
+  if (
+    boatListingContext == null ||
+    boatListingContext.obj == null ||
+    boatListingContext.boatList == null ||
+    boatListingContext.boatList.length == 0
+  ) {
+    router.push("/404");
+  }
 
   function Items({ currentItems }) {
     return (
@@ -143,14 +126,18 @@ const BoatListing = () => {
     const [itemOffset, setItemOffset] = useState(0);
 
     const endOffset = itemOffset + itemsPerPage;
-    const currentItems = boats.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(boats.length / itemsPerPage);
+    const currentItems = boatListingContext.boatList.slice(
+      itemOffset,
+      endOffset
+    );
+    const pageCount = Math.ceil(
+      boatListingContext.boatList.length / itemsPerPage
+    );
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
-      const newOffset = (event.selected * itemsPerPage) % boats.length;
-      console.log(
-        `User requested page number ${event.selected}, which is offset ${newOffset}`
-      );
+      const newOffset =
+        (event.selected * itemsPerPage) % boatListingContext.boatList.length;
+
       setItemOffset(newOffset);
     };
 
@@ -191,7 +178,6 @@ const BoatListing = () => {
     );
   }
 
-  // Get Data
   return (
     <>
       <PaginatedItems itemsPerPage={4}></PaginatedItems>

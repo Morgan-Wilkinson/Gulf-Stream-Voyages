@@ -1,10 +1,13 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import MainMenu from "../MainMenu";
 import MobileMenu from "../MobileMenu";
 import { useContext } from "react";
 import { UserContext } from "../../../pages/_app";
+import { BoatListContext } from "../../../pages/_app";
 import LogoutAndRedirect from "../../../components/common/LogoutAndRedirect";
+import getAllData from "../../../firebase/firestore/getAllData";
 
 const LoginButtons = () => {
   const userContext = useContext(UserContext);
@@ -44,6 +47,7 @@ const LoginButtons = () => {
 const Header = () => {
   const [navbar, setNavbar] = useState(false);
   const userContext = useContext(UserContext);
+  const boatListingContext = useContext(BoatListContext);
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -56,6 +60,33 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", changeBackground);
   }, []);
+
+  useEffect(() => {
+    async function fetchBoatData() {
+      const res = await getAllData("boats");
+      console.log(res);
+      if (res != null) {
+        boatListingContext.updateBoatList(res);
+      }
+    }
+
+    if (
+      boatListingContext == null ||
+      boatListingContext.obj == null ||
+      boatListingContext.boatList == null ||
+      boatListingContext.boatList.length == 0
+    ) {
+      const obj = localStorage.getItem("boats")
+        ? JSON.parse(localStorage.getItem("boats"))
+        : null;
+
+      if (obj == null) {
+        fetchBoatData();
+      } else if (obj != null) {
+        boatListingContext.updateBoatList(obj);
+      }
+    }
+  }, [boatListingContext]);
 
   useEffect(() => {
     if (
@@ -143,4 +174,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default dynamic(() => Promise.resolve(Header), { ssr: false });

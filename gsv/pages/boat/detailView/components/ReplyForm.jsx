@@ -1,17 +1,33 @@
+import { useContext } from "react";
+import { NewReviewContext } from "../[name]";
 const ReplyForm = () => {
+  const newReviewContext = useContext(NewReviewContext);
+
+  const setTitle = (title) => {
+    newReviewContext.title = title;
+  };
+
+  const setContent = (content) => {
+    newReviewContext.content = content;
+  };
+
   return (
     <form className="row y-gap-30 pt-20">
       <div className="col-xl-6">
         <div className="form-input ">
-          <input type="text" required />
-          <label className="lh-1 text-16 text-light-1">Text</label>
+          <input
+            type="text"
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <label className="lh-1 text-16 text-light-1">Title</label>
         </div>
       </div>
       {/* End .col */}
 
       <div className="col-xl-6">
         <div className="form-input ">
-          <input type="text" required />
+          <input type="text" value={newReviewContext.email} required disabled />
           <label className="lh-1 text-16 text-light-1">Email</label>
         </div>
       </div>
@@ -19,7 +35,12 @@ const ReplyForm = () => {
 
       <div className="col-12">
         <div className="form-input ">
-          <textarea required rows={4} defaultValue={""} />
+          <textarea
+            required
+            rows={4}
+            defaultValue={""}
+            onChange={(e) => setContent(e.target.value)}
+          />
           <label className="lh-1 text-16 text-light-1">
             Write Your Comment
           </label>

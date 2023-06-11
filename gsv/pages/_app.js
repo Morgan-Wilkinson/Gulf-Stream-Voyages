@@ -9,12 +9,14 @@ import "swiper/css/effect-cards";
 import "aos/dist/aos.css";
 import "../styles/index.scss";
 import User from "../models/User";
+import BoatList from "../models/BoatList";
 
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }
 
 export const UserContext = createContext();
+export const BoatListContext = createContext();
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -27,8 +29,10 @@ export default function App({ Component, pageProps }) {
   return (
     <main>
       <UserContext.Provider value={User}>
-        <Component {...pageProps} />
-        <ScrollTop />
+        <BoatListContext.Provider value={BoatList}>
+          <Component {...pageProps} />
+          <ScrollTop />
+        </BoatListContext.Provider>
       </UserContext.Provider>
     </main>
   );
