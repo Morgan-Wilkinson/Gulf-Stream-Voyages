@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { BoatListContext } from "../../_app";
 import ReactPaginate from "react-paginate";
 
@@ -14,7 +14,6 @@ const BoatListing = () => {
 
   if (
     boatListingContext == null ||
-    boatListingContext.obj == null ||
     boatListingContext.boatList == null ||
     boatListingContext.boatList.length == 0
   ) {
@@ -22,9 +21,14 @@ const BoatListing = () => {
   }
 
   function Items({ currentItems }) {
+    if (currentItems == null || currentItems.length < 0) {
+      return;
+    }
+
     return (
       <>
         {currentItems &&
+          currentItems.length > 0 &&
           currentItems.map((element, index) => (
             <div
               className="col-12"

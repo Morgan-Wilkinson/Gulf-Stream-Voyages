@@ -62,7 +62,7 @@ const BoatSingleDynamic = () => {
   const router = useRouter();
 
   const [boat, setBoat] = useState({});
-  const name = router.query.name;
+  const name = router.isReady ? router.query.name : "";
 
   // Get the Data for the boat and if null retrieve the data
   useEffect(() => {
@@ -70,7 +70,13 @@ const BoatSingleDynamic = () => {
       ? JSON.parse(localStorage.getItem("boats"))
       : null;
 
-    if (name) {
+    if (name != "" && name != null && boats != null) {
+      console.log(name);
+      console.log(
+        window.location.href.substring(
+          window.location.href.lastIndexOf("/") + 1
+        )
+      );
       const foundBoat = boats.find((item) => item.name == name);
       if (name == null && foundBoat == null) {
         router.push("/404");
@@ -79,8 +85,10 @@ const BoatSingleDynamic = () => {
       }
     }
   }, [name]);
-  if (name == null && boat == null) router.push("/404");
-  else
+
+  if (name == null || boat == null) {
+    router.push("/404");
+  } else {
     return (
       <>
         <SingleBoatContext.Provider value={boat}>
@@ -212,6 +220,7 @@ const BoatSingleDynamic = () => {
         </SingleBoatContext.Provider>
       </>
     );
+  }
 };
 
 export default dynamic(() => Promise.resolve(BoatSingleDynamic), {

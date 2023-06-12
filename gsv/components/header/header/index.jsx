@@ -64,7 +64,6 @@ const Header = () => {
   useEffect(() => {
     async function fetchBoatData() {
       const res = await getAllData("boats");
-      console.log(res);
       if (res != null) {
         boatListingContext.updateBoatList(res);
       }

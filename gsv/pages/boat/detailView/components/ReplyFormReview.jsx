@@ -1,4 +1,5 @@
 const ReplyFormReview = () => {
+  // Create map of buttons to render
   const replyReviewContent = [
     {
       id: 1,

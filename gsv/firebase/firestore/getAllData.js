@@ -12,7 +12,7 @@ export default async function getAllData(item) {
 
     if (tempArray.length > 0) {
       localStorage.setItem(item, JSON.stringify(tempArray));
-      resultData = localStorage.getItem(item);
+      resultData = JSON.parse(localStorage.getItem(item));
     } else {
       console.log("No such document!");
     }
