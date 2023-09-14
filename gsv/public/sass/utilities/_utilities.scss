@@ -1118,8 +1118,8 @@ $_displays: none, inline-block, block, flex;
     transform: translateY(-50%) translateX(-50%);
     background-color: black;
     border-radius: 100%;
-    width: rem(52px);
-    height: rem(52px);
+    width: 52px;
+    height: 52px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1129,16 +1129,16 @@ $_displays: none, inline-block, block, flex;
     .icon {
       color: white;
       stroke-width: 1;
-      width: rem(28px);
-      height: rem(28px);
+      width: 28px;
+      height: 28px;
     }
 
     &.-bottom-right {
       top: unset;
       left: unset;
       transform: unset;
-      bottom: rem(30px);
-      right: rem(30px);
+      bottom: 30px;
+      right: 30px;
     }
   }
 }
